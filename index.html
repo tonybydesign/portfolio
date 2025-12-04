@@ -337,24 +337,39 @@
         }
 
         .project-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            grid-auto-flow: dense; gap: 1.5rem; padding: 0 5% 6rem 5%;
-            max-width: 1400px; margin: 0 auto;
+            display: grid; 
+            /* Default column size, auto fit for responsiveness */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-flow: dense; 
+            grid-auto-rows: 1fr; /* Default row size to make images equal height */
+            gap: 1.5rem; 
+            padding: 0 5% 6rem 5%;
+            max-width: 1400px; 
+            margin: 0 auto;
         }
         .ottawa-grid { grid-template-columns: repeat(3, 1fr) !important; grid-auto-rows: auto; }
         
         .grid-item {
-            position: relative; border-radius: 8px; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(20,20,20,0.5); transition: all 0.4s ease;
+            position: relative; 
+            border-radius: 8px; 
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(20,20,20,0.5); 
+            transition: all 0.4s ease;
+            height: 100%; /* Important: makes grid item fill auto-row height */
         }
         .grid-item:hover {
-            transform: translateY(-5px); border-color: var(--global-glow-color);
+            transform: translateY(-5px);
+            border-color: var(--global-glow-color);
             box-shadow: 0 10px 30px -10px var(--global-glow-color);
         }
         .grid-item img { 
-            width: 100%; height: 100%; object-fit: cover; display: block; 
+            width: 100%; 
+            height: 100%; /* Image fills container height */
+            object-fit: cover; 
+            display: block; 
             transition: transform 0.6s ease; 
-            min-height: 200px; /* Ensure images have minimum height */
+            min-height: 200px;
         }
         .grid-item:hover img { transform: scale(1.05); }
         
@@ -367,6 +382,32 @@
         
         .col-span-2 { grid-column: span 2; }
         .row-span-2 { grid-row: span 2; }
+
+        /* BACK TO TOP BUTTON */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--global-glow-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            display: none; /* Hidden by default, shown by JS */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
 
         /* YOUTUBE STYLE PLAYER */
         .youtube-container {
@@ -678,3 +719,33 @@
                 <div class="tweet-container">
                     <blockquote class="twitter-tweet" data-theme="dark">
                         <a href="https://twitter.com/ValorantEsports/status/1875270909399040169">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1885106337132036568">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Global Storylines -->
+            <h3 class="feed-section-header">Global Competitive Storylines</h3>
+            <div class="tweet-grid">
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879674224346071229">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882219415481225381">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1866888280249127081">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882634955681051053">View Tweet on Twitter</a>
