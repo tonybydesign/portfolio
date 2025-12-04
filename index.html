@@ -72,7 +72,6 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: -1; 
             background: radial-gradient(ellipse at center, transparent 70%, var(--global-glow-color) 160%);
-            /* UPDATED: Increased opacity by 3% (0.15 -> 0.18) */
             opacity: 0.18; 
             mix-blend-mode: screen;
             transition: background 0.8s ease; 
@@ -166,11 +165,20 @@
         /* ==========================
            5. COMPONENT: CAROUSEL
            ========================== */
+        /* UPDATED: Carousel container for 3-logo focus */
         .brands-section {
-            padding: 2rem 0; text-align: center; position: relative;
-            overflow: hidden; margin-bottom: 4rem;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            padding: 2rem 0; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden; 
+            margin-bottom: 4rem;
+            /* Narrower width to force focus on fewer items */
+            max-width: 900px; 
+            margin-left: auto; 
+            margin-right: auto;
+            /* Stronger gradient mask for "fading out on each side" */
+            mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
         }
         .section-title {
             color: var(--secondary-text); text-transform: uppercase;
@@ -186,7 +194,8 @@
         }
         
         .logo-item {
-            padding-right: 5rem; 
+            /* Increased spacing for "only 3 logos at a time" visual */
+            padding: 0 60px; 
             display: flex; align-items: center;
         }
 
@@ -393,6 +402,14 @@
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white; font-family: 'Space Mono', monospace; font-size: 0.7rem;
             text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;
+        }
+        
+        /* NEW UTILITY: Crop Bus Wrap to 16:9 with centered windows */
+        .crop-bus-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: center; /* Ensures windows/middle is focus */
         }
         
         /* Span utilities */
@@ -900,14 +917,14 @@
             <div class="grid-item span-2"><img src="welcomesolo.jpg" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
             <div class="grid-item span-2"><img src="v1.jpg" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
 
-            <!-- Row 3: Large Graphics (Span 2 cols each) -->
-            <div class="grid-item span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
-            <div class="grid-item span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
-
-            <!-- Row 4: Match Graphics (Standard 1 col) -->
+            <!-- Row 4: Match Graphics (Standard 1 col) - MOVED ABOVE ROW 3 -->
             <div class="grid-item"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
             <div class="grid-item"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
             <div class="grid-item"><img src="100T_Gameday.jpg" alt="Match Day"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+
+            <!-- Row 3: Large Graphics (Span 2 cols each) - MOVED BELOW ROW 4 -->
+            <div class="grid-item span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
         </div>
     </div>
     
@@ -998,9 +1015,9 @@
         </div>
         <div class="section-title" style="text-align:center;margin-top:4rem;">Animated Graphic</div>
         <div class="video-split-section">
-            <div class="split-media-item"><img src="https://placehold.co/600x400/222/FFF?text=Promo+Static" alt="Promo"></div>
-            <!-- TONY PERSONAL VIDEO -->
-            <div class="split-media-item"><video controls playsinline src="https://www.dropbox.com/scl/fi/13s9jzo033m9i53evda03/tony_personal.mp4?rlkey=f2bd00weh6d4alx5ncp8yzaj0&st=w4jszw1s&raw=1"></video></div>
+            <div class="split-media-item"><img src="promo.jpg" alt="Promo"></div>
+            <!-- TWITTER VIDEO -->
+            <div class="split-media-item"><video controls playsinline src="https://www.dropbox.com/scl/fi/zaw61kn1usxo4klcyv2rp/twittervideofortony.mp4?rlkey=bvka4c8fl7e54u61cizxc8ama&st=4gvmypph&raw=1"></video></div>
         </div>
     </div>
 
@@ -1066,7 +1083,8 @@
         <!-- Physical Activations - MOVED TO TOP -->
         <h3 class="section-title" style="text-align:center; margin-bottom: 2rem;">On-Site Activations</h3>
         <div class="project-grid grid-3-cols" style="margin-bottom: 4rem;">
-            <div class="grid-item"><img src="buswrap.webp" alt="Bus Wrap"><div class="grid-caption">CUSTOM BUS WRAP</div></div>
+            <!-- UPDATED: Added crop-bus-wrap class -->
+            <div class="grid-item"><img src="buswrap.webp" alt="Bus Wrap" class="crop-bus-wrap"><div class="grid-caption">CUSTOM BUS WRAP</div></div>
             <div class="grid-item"><img src="PopUpBannerandPopsicleCart.webp" alt="Popsicle Cart"><div class="grid-caption">BRANDED POP-UP CART</div></div>
             <div class="grid-item"><img src="CustomPopsicles.webp" alt="Custom Popsicles"><div class="grid-caption">CUSTOM MOLDED POPSICLES</div></div>
         </div>
@@ -1164,6 +1182,12 @@
               src: "https://www.dropbox.com/scl/fi/behxsesorsjf2f3zvofty/logointro.mp4?rlkey=ch1jq0cv1x55atajpzj42caln&st=m282bvw7&raw=1", 
               title: "Logo Intro Reveal", 
               desc: "Dynamic logo reveal animation with impact sound design." 
+            },
+            /* UPDATED: Added 5th Video with raw=1 fix */
+            {
+              src: "https://www.dropbox.com/scl/fi/d6qcifh023bp7wbi15oyd/tony_personal-Trim.mp4?rlkey=gsxhwddxymdffzat2a1kjta2g&st=grasyb7o&raw=1",
+              title: "Animated Graphic",
+              desc: "Motion design showcase."
             }
         ];
 
@@ -1180,15 +1204,15 @@
         let startVal = 0;
 
 
-        // --- GLOBAL FUNCTIONS (Accessible by HTML onclick attributes) ---
+        // --- GLOBAL FUNCTIONS (Explicitly attached to window) ---
 
-        function renderPlaylist() {
+        window.renderPlaylist = function() {
             if(!playlistContainer) return;
             playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
             videoList.forEach((vid, index) => {
                 const item = document.createElement('div');
                 item.className = 'video-thumbnail';
-                item.onclick = () => swapVideo(index);
+                item.onclick = () => window.swapVideo(index);
                 
                 item.innerHTML = `
                     <div class="thumb-img-wrapper">
@@ -1220,7 +1244,7 @@
             });
         }
 
-        function swapVideo(index) {
+        window.swapVideo = function(index) {
             if(!mainPlayer) return;
             const oldMain = { 
                 src: mainPlayer.getAttribute('src'), 
@@ -1239,11 +1263,11 @@
                 videoList.splice(index, 1); 
                 videoList.push(oldMain);
             }
-            renderPlaylist();
+            window.renderPlaylist();
         }
 
         // UPDATED: Added pushState param to handle history logic
-        function showPage(pageId, manageHistory = true) {
+        window.showPage = function(pageId, manageHistory = true) {
             
             // 1. History API Logic
             // Only push a new state if manageHistory is true
@@ -1289,8 +1313,8 @@
             else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
             else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#9DE8FF');
 
-            if(pageId === 'work') setTimeout(updateDeck, 50);
-            if(pageId === 'home') runStats();
+            if(pageId === 'work') setTimeout(window.updateDeck, 50);
+            if(pageId === 'home') window.runStats();
             
             // Fix Twitter Widget Reload
             if (pageId === 'riot') {
@@ -1302,7 +1326,7 @@
             }
         }
 
-        function runStats() {
+        window.runStats = function() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
@@ -1321,7 +1345,7 @@
             });
         }
 
-        function updateDeckVisuals(floatIndex) {
+        window.updateDeckVisuals = function(floatIndex) {
             if(!cards || cards.length === 0) return; 
             if(floatIndex < 0) floatIndex = 0;
             if(floatIndex > cards.length - 1) floatIndex = cards.length - 1;
@@ -1364,8 +1388,8 @@
             }
         }
 
-        function updateDeck() {
-            updateDeckVisuals(currentIndex);
+        window.updateDeck = function() {
+            window.updateDeckVisuals(currentIndex);
             const infoHeader = document.getElementById('info-header');
             const infoDesc = document.getElementById('info-desc');
             if(projectData[currentIndex]) {
@@ -1389,19 +1413,24 @@
             }
         }
 
-        function moveDeck(direction) {
+        window.moveDeck = function(direction) {
             if(!cards || cards.length === 0) return;
             currentIndex += direction;
             if(currentIndex < 0) currentIndex = cards.length - 1;
             if(currentIndex >= cards.length) currentIndex = 0;
-            updateDeck();
+            window.updateDeck();
         }
 
-        function selectCard(index) {
+        window.selectCard = function(index) {
             currentIndex = index;
-            updateDeck();
+            window.updateDeck();
         }
 
+        // --- Drag functions don't need to be global unless attached inline, 
+        // but they are attached via addEventListener in DOMContentLoaded.
+        // We'll keep them internal to avoid clutter, or make them global if needed.
+        // Since they are used inside init, local is fine.
+        
         function startDrag(e) {
             if (!deckContainer) return;
             isDragging = true;
@@ -1419,7 +1448,7 @@
             isDragging = false;
             if (deckContainer) deckContainer.style.cursor = 'grab';
             const finalIndex = Math.round(currentIndex);
-            snapToCard(finalIndex);
+            window.snapToCard(finalIndex);
         }
 
         function moveDrag(e) {
@@ -1442,15 +1471,15 @@
             }
 
             currentIndex = newVal;
-            updateDeckVisuals(currentIndex);
+            window.updateDeckVisuals(currentIndex);
         }
 
-        function snapToCard(targetIndex) {
+        window.snapToCard = function(targetIndex) {
             if (!cards || cards.length === 0) return;
             if (targetIndex < 0) targetIndex = 0;
             if (targetIndex > cards.length - 1) targetIndex = cards.length - 1;
             currentIndex = targetIndex;
-            updateDeck();
+            window.updateDeck();
         }
 
         // --- INITIALIZATION ON LOAD ---
@@ -1464,7 +1493,7 @@
             cards = document.querySelectorAll('.work-card'); 
             backToTopBtn = document.getElementById('backToTop');
 
-            if(playlistContainer) renderPlaylist();
+            if(playlistContainer) window.renderPlaylist();
             
             if (deckContainer) {
                 deckContainer.addEventListener('mousedown', startDrag);
@@ -1500,13 +1529,13 @@
             const initialHash = window.location.hash.replace('#', '');
             if(initialHash && document.getElementById('page-' + initialHash)) {
                 // Pass false so we don't push the state again on load
-                showPage(initialHash, false);
+                window.showPage(initialHash, false);
             } else {
                 // Pass false to not clutter history with initial "home" state
-                showPage('home', false); 
+                window.showPage('home', false); 
             }
             
-            updateDeck();
+            window.updateDeck();
         });
 
         // UPDATED: Listen for browser Back/Forward buttons
@@ -1514,14 +1543,13 @@
             if (event.state && event.state.pageId) {
                 // User went back/forward to a known state.
                 // Pass false so we don't push a NEW state while going back.
-                showPage(event.state.pageId, false);
+                window.showPage(event.state.pageId, false);
             } else {
                 // If there's no state (e.g. they went back to the very first load), default to Home
-                showPage('home', false);
+                window.showPage('home', false);
             }
         });
 
     </script>
 </body>
 </html>
-
