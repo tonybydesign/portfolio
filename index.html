@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antonio Bautista-Foti | Portfolio</title>
     
-    <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- External Scripts -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     <style>
@@ -498,7 +496,6 @@
 
     <div class="vignette"></div>
 
-    <!-- SHARED NAVIGATION -->
     <nav>
         <div class="nav-brand">
             <div class="status-dot"></div>
@@ -516,7 +513,6 @@
         </div>
     </nav>
 
-    <!-- PAGES -->
     <div id="page-home" class="page-view active">
         <section class="hero">
             <h1>
@@ -527,7 +523,6 @@
         <section class="brands-section">
             <div class="section-title">Partners Worked With</div>
             <div class="marquee-track">
-                <!-- 3 SETS FOR SAFETY -->
                 <div class="logo-item"><img src="https://logo.clearbit.com/progressive.com" alt="Progressive"></div>
                 <div class="logo-item"><img src="https://logo.clearbit.com/americanexpress.com" alt="Amex"></div>
                 <div class="logo-item"><img src="https://logo.clearbit.com/bitstamp.net" alt="Bitstamp"></div>
@@ -586,21 +581,20 @@
             <div class="deck-arrow arrow-left" onclick="moveDeck(-1)"><i class="fas fa-chevron-left"></i></div>
             <div class="deck-arrow arrow-right" onclick="moveDeck(1)"><i class="fas fa-chevron-right"></i></div>
             <div class="work-deck" id="cardDeck">
-                <!-- CARDS -->
                 <div class="work-card glow-red" data-index="0" onclick="showPage('riot')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('26199314810_e2e54f3bf3_b.jpg');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FF4655?text=Riot+Games');"></div>
                     <div class="card-content"></div>
                 </div>
                 <div class="work-card glow-teal" data-index="1" onclick="showPage('immortals')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('ENSBPHWYFZGX5ICP7JOH2UQJSY.jpg');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/26E6C7?text=Immortals');"></div>
                     <div class="card-content"></div>
                 </div>
                 <div class="work-card glow-red" data-index="2" onclick="showPage('maryville')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('NORTH_champions.jpg');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FF4655?text=Maryville');"></div>
                     <div class="card-content"></div>
                 </div>
                 <div class="work-card glow-yellow" data-index="3" onclick="showPage('ottawa')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('convert.webp');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FFC700?text=Ottawa');"></div>
                     <div class="card-content"></div>
                 </div>
             </div>
@@ -613,7 +607,6 @@
         </div>
     </div>
 
-    <!-- Project Pages (Immortals, Riot, etc.) included in logic below, HTML same as previous steps -->
     <div id="page-immortals" class="page-view">
         <div class="project-hero">
             <h1 class="project-title" style="color:#26E6C7; text-shadow:0 0 30px #26E6C7;">Immortals</h1>
@@ -628,25 +621,25 @@
             </div>
         </div>
         <div class="project-grid">
-            <div class="grid-item row-span-2"><img src="100T_Gameday.jpg"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
-            <div class="grid-item col-span-2"><img src="welcomesolo.jpg"><div class="grid-caption">WELCOME SOLO</div></div>
-            <div class="grid-item row-span-2"><img src="tactical.jpg"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
-            <div class="grid-item col-span-2"><img src="promo.jpg"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="100T_10.jpg"><div class="grid-caption">SCORE 1-0</div></div>
-            <div class="grid-item row-span-2"><img src="100T_11.jpg"><div class="grid-caption">SCORE 1-1</div></div>
-            <div class="grid-item row-span-2"><img src="100T_20.jpg"><div class="grid-caption">SCORE 2-0</div></div>
-            <div class="grid-item row-span-2"><img src="100T_21.jpg"><div class="grid-caption">SCORE 2-1</div></div>
-            <div class="grid-item col-span-2"><img src="3DAYS.jpg"><div class="grid-caption">3 DAYS LEFT</div></div>
-            <div class="grid-item col-span-2"><img src="1week.jpg"><div class="grid-caption">1 WEEK LEFT</div></div>
-            <div class="grid-item row-span-2"><img src="revenge.jpg"><div class="grid-caption">REVENGE</div></div>
-            <div class="grid-item row-span-2"><img src="kenvi.jpg"><div class="grid-caption">KENVI</div></div>
-            <div class="grid-item row-span-2"><img src="ignar.jpg"><div class="grid-caption">IGNAR</div></div>
-            <div class="grid-item row-span-2"><img src="lost1.jpg"><div class="grid-caption">LOST</div></div>
-            <div class="grid-item col-span-2"><img src="happybirthday_tactical.jpg"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="24h.jpg"><div class="grid-caption">24 HOUR WINNER</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Match+Day+Vert"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Solo"><div class="grid-caption">WELCOME SOLO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Tactical+Match"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Promo+Wide"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-0"><div class="grid-caption">SCORE 1-0</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-1"><div class="grid-caption">SCORE 1-1</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-0"><div class="grid-caption">SCORE 2-0</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-1"><div class="grid-caption">SCORE 2-1</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=3+Days+Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left"><div class="grid-caption">1 WEEK LEFT</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Revenge"><div class="grid-caption">REVENGE</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Kenvi"><div class="grid-caption">KENVI</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Ignar"><div class="grid-caption">IGNAR</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Lost"><div class="grid-caption">LOST</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Happy+Birthday"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=24H+Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
         </div>
     </div>
-    <!-- Other project pages follow similar structure... -->
+    
     <div id="page-maryville" class="page-view">
         <div class="project-hero">
             <h1 class="project-title" style="color: #FF4655; text-shadow: 0 0 30px #FF4655;">Maryville University</h1>
@@ -661,23 +654,23 @@
             </div>
         </div>
         <div class="project-grid">
-            <div class="grid-item row-span-2"><img src="NORTH_champions.jpg"><div class="grid-caption">KINGS OF THE NORTH</div></div>
-            <div class="grid-item col-span-2"><img src="final_v2.jpg"><div class="grid-caption">ROSTER PHOTO</div></div>
-            <div class="grid-item row-span-2"><img src="ow_nationalchampionship.jpg"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
-            <div class="grid-item col-span-2"><img src="10k.jpg"><div class="grid-caption">10K MILESTONE</div></div>
-            <div class="grid-item row-span-2"><img src="iced_redbirds.jpg"><div class="grid-caption">ZACHARY HUGHES</div></div>
-            <div class="grid-item row-span-2"><img src="battleforthenorth_zyko.jpg"><div class="grid-caption">ZYKO</div></div>
-            <div class="grid-item row-span-2"><img src="nacl_schedule.jpg"><div class="grid-caption">NACL SCHEDULE</div></div>
-            <div class="grid-item col-span-2"><img src="1weekleft.jpg"><div class="grid-caption">1 WEEK LEFT</div></div>
-            <div class="grid-item col-span-2"><img src="Copy+of+CYW_5621.jpg"><div class="grid-caption">TROPHY LIFT</div></div>
-            <div class="grid-item row-span-2"><img src="thegym_v2.jpg"><div class="grid-caption">THE GYM SHOWMATCH</div></div>
-            <div class="grid-item row-span-2"><img src="test1_v2.jpg"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
-            <div class="grid-item row-span-2"><img src="val_nace_finals.jpg"><div class="grid-caption">NACE FINALS BOUND</div></div>
-            <div class="grid-item col-span-2"><img src="welcome_squid.jpg"><div class="grid-caption">WELCOME SQUID</div></div>
-            <div class="grid-item row-span-2"><img src="zamudo.jpg"><div class="grid-caption">WELCOME ZAMUDO</div></div>
-            <div class="grid-item row-span-2"><img src="top4clol.jpg"><div class="grid-caption">TOP 4 CLOL</div></div>
-            <div class="grid-item row-span-2"><img src="v1.jpg"><div class="grid-caption">THANK YOU LETTER</div></div>
-            <div class="grid-item col-span-2"><img src="vision_ow.jpg"><div class="grid-caption">WELCOME VISION</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Kings+of+North"><div class="grid-caption">KINGS OF THE NORTH</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Roster+Photo"><div class="grid-caption">ROSTER PHOTO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Nat+Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=10K+Milestone"><div class="grid-caption">10K MILESTONE</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zach+Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zyko"><div class="grid-caption">ZYKO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACL+Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left"><div class="grid-caption">1 WEEK LEFT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Trophy+Lift"><div class="grid-caption">TROPHY LIFT</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=The+Gym"><div class="grid-caption">THE GYM SHOWMATCH</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Welcome+Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACE+Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Squid"><div class="grid-caption">WELCOME SQUID</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Top+4"><div class="grid-caption">TOP 4 CLOL</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Thank+You"><div class="grid-caption">THANK YOU LETTER</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Vision"><div class="grid-caption">WELCOME VISION</div></div>
         </div>
     </div>
      <div id="page-ottawa" class="page-view">
@@ -693,14 +686,13 @@
                 </div>
             </div>
         </div>
-        <!-- Strict 3x2 Grid for Ottawa -->
         <div class="project-grid ottawa-grid">
-            <div class="grid-item"><img src="convert.webp" alt="Arena"><div class="grid-caption">WELCOME TO ARENA</div></div>
-            <div class="grid-item"><img src="FNWo-MSXsAAaqwT.jpg" alt="Women"><div class="grid-caption">WOMEN OF OTTAWA</div></div>
-            <div class="grid-item"><img src="E88NakkXEAQeThK.jpg" alt="Roster"><div class="grid-caption">OFFICIAL ROSTER</div></div>
-            <div class="grid-item"><img src="E_LXTBmWUAAcZr8.jpg" alt="Yung"><div class="grid-caption">WELCOME YUNG</div></div>
-            <div class="grid-item"><img src="FF4s_QCWYAARQdc.jpg" alt="Levi"><div class="grid-caption">LEVI PUG</div></div>
-            <div class="grid-item"><img src="FCuI_jeXoAQWias.jpg" alt="Cleave"><div class="grid-caption">INTERN CLEAVE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Arena" alt="Arena"><div class="grid-caption">WELCOME TO ARENA</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Women+of+Ottawa" alt="Women"><div class="grid-caption">WOMEN OF OTTAWA</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Official+Roster" alt="Roster"><div class="grid-caption">OFFICIAL ROSTER</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Welcome+Yung" alt="Yung"><div class="grid-caption">WELCOME YUNG</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Levi+Pug" alt="Levi"><div class="grid-caption">LEVI PUG</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Intern+Cleave" alt="Cleave"><div class="grid-caption">INTERN CLEAVE</div></div>
         </div>
     </div>
     
@@ -708,7 +700,9 @@
         <header class="page-header"><h1 class="page-title">Video & Animation</h1><p class="page-subtitle">Motion graphics, editing, and storytelling.</p></header>
         <div class="youtube-container">
             <div class="main-video-area">
-                <div class="main-video-player"><video id="mainPlayer" controls playsinline src="CHARADES V7.mp4"></video></div>
+                <div class="main-video-player">
+                    <video id="mainPlayer" controls playsinline src="https://www.dropbox.com/scl/fi/erdm25qowckyid9nx65wr/CHARADES-V7.mp4?rlkey=qlhs5pih5bx0s256e0bxm9kf5&st=ce14pt06&raw=1"></video>
+                </div>
                 <div class="video-meta">
                     <div id="mainTitle" class="video-title">Twitch Emote Charades</div>
                     <div id="mainDesc" class="video-desc">A fun and engaging piece of content created for Immortals.</div>
@@ -718,17 +712,16 @@
         </div>
         <div class="section-title" style="text-align:center;margin-top:4rem;">Animated Graphic</div>
         <div class="video-split-section">
-            <div class="split-media-item"><img src="promo.jpg" alt="Promo"></div>
-            <div class="split-media-item"><video controls playsinline src="tony_personal.mp4"></video></div>
+            <div class="split-media-item"><img src="https://placehold.co/600x400/222/FFF?text=Promo+Static" alt="Promo"></div>
+            <div class="split-media-item"><video controls playsinline src="https://www.dropbox.com/scl/fi/13s9jzo033m9i53evda03/tony_personal.mp4?rlkey=f2bd00weh6d4alx5ncp8yzaj0&st=w4jszw1s&raw=1"></video></div>
         </div>
     </div>
 
     <div id="page-influencers" class="page-view">
         <header class="page-header"><h1 class="page-title">Influencers</h1><p class="page-subtitle">Connecting brands with personalities.</p></header>
         <div class="influencer-grid">
-            <!-- YouGelly -->
             <div class="influencer-card">
-                <img src="yougelly.png" alt="YouGelly" class="influencer-img">
+                <img src="https://placehold.co/200x200/222/FFF?text=YouGelly" alt="YouGelly" class="influencer-img">
                 <h3 class="influencer-name">YouGelly</h3>
                 <p class="influencer-role">TFT & League Streamer</p>
                 <div class="influencer-stats">
@@ -737,9 +730,8 @@
                     <div class="stat-row"><i class="fab fa-instagram"></i><span>22.4K Followers</span></div>
                 </div>
             </div>
-            <!-- ChiefBeef -->
             <div class="influencer-card">
-                <img src="chiefbeef.png" alt="ChiefBeef" class="influencer-img">
+                <img src="https://placehold.co/200x200/222/FFF?text=ChiefBeef" alt="ChiefBeef" class="influencer-img">
                 <h3 class="influencer-name">ChiefBeef</h3>
                 <p class="influencer-role">Rocket League Streamer</p>
                 <div class="influencer-stats">
@@ -747,9 +739,8 @@
                     <div class="stat-row"><i class="fab fa-twitter"></i><span>3.8K Followers</span></div>
                 </div>
             </div>
-            <!-- Avery -->
             <div class="influencer-card">
-                <img src="avery.png" alt="Avery" class="influencer-img">
+                <img src="https://placehold.co/200x200/222/FFF?text=Avery" alt="Avery" class="influencer-img">
                 <h3 class="influencer-name">Avery</h3>
                 <p class="influencer-role">Variety Streamer</p>
                 <div class="influencer-stats">
@@ -764,21 +755,20 @@
     <div id="page-events" class="page-view">
         <header class="page-header"><h1 class="page-title">Events</h1><p class="page-subtitle">Experiential design and coverage.</p></header>
         <div class="project-grid">
-            <div class="grid-item col-span-2"><img src="PopUpBannerandPopsicleCart.jpg"><div class="grid-caption">POPSICLE CART SETUP</div></div>
-            <div class="grid-item row-span-2"><img src="buswrap.jpg"><div class="grid-caption">BUS WRAP DESIGN</div></div>
-            <div class="grid-item col-span-2"><img src="StepAndRepeat.jpg"><div class="grid-caption">STEP AND REPEAT</div></div>
-            <div class="grid-item col-span-2"><img src="GroupPicture.jpg"><div class="grid-caption">COMMUNITY BRUNCH</div></div>
-            <div class="grid-item"><img src="DrinkMenu.jpg"><div class="grid-caption">CUSTOM DRINK MENU</div></div>
-            <div class="grid-item"><img src="CupDesign.webp"><div class="grid-caption">BRANDED CUP DESIGN</div></div>
-            <div class="grid-item"><img src="CustomPopsicles.jpg"><div class="grid-caption">CUSTOM POPSICLES</div></div>
-            <div class="grid-item"><img src="SocialPost1.webp"><div class="grid-caption">SOCIAL PROMOTION</div></div>
-            <div class="grid-item"><img src="SocialPost2.webp"><div class="grid-caption">EVENT ITINERARY</div></div>
-            <div class="grid-item"><img src="SocialPost3.webp"><div class="grid-caption">MEET AND GREET</div></div>
-            <div class="grid-item col-span-2"><img src="v1.jpg"><div class="grid-caption">TFT COMMUNITY EVENT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Popsicle+Cart"><div class="grid-caption">POPSICLE CART SETUP</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Bus+Wrap"><div class="grid-caption">BUS WRAP DESIGN</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Step+Repeat"><div class="grid-caption">STEP AND REPEAT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Group+Pic"><div class="grid-caption">COMMUNITY BRUNCH</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Drink+Menu"><div class="grid-caption">CUSTOM DRINK MENU</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Cup+Design"><div class="grid-caption">BRANDED CUP DESIGN</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Custom+Pops"><div class="grid-caption">CUSTOM POPSICLES</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+1"><div class="grid-caption">SOCIAL PROMOTION</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+2"><div class="grid-caption">EVENT ITINERARY</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+3"><div class="grid-caption">MEET AND GREET</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=TFT+Community"><div class="grid-caption">TFT COMMUNITY EVENT</div></div>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="global-footer">
         <div class="footer-content">
             <div class="nav-col">
@@ -1044,11 +1034,29 @@
         }
 
         // YouTube Logic
+        // DROPBOX LINKS INTEGRATED BELOW
         const videoList = [
-            { src: "chat.mov", title: "Stream Chat Widget", desc: "Custom animated chat overlay designed for high-energy streams." },
-            { src: "emoteintro.mov", title: "Emote Intro Animation", desc: "Playful intro sequence showcasing custom channel emotes." },
-            { src: "l3.mov", title: "Lower Third Graphic", desc: "Clean and modern lower third for on-stream talent identification." },
-            { src: "logointro.mov", title: "Logo Intro Reveal", desc: "Dynamic logo reveal animation with impact sound design." }
+            { 
+              src: "https://www.dropbox.com/scl/fi/e0427gjah6rhkg65dxy0r/chat.mov?rlkey=fylcaf4ostgvzd1ci4c01k5a5&st=sl4tsjlq&raw=1", 
+              title: "Stream Chat Widget", 
+              desc: "Custom animated chat overlay designed for high-energy streams." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/cm4arc4c8aayedp4643c1/emoteintro.mov?rlkey=5oplnta5lf4zgtq2wly3pz66i&st=focx57mg&raw=1", 
+              title: "Emote Intro Animation", 
+              desc: "Playful intro sequence showcasing custom channel emotes." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/29l6xz3dd1ii912nw6che/l3.mov?rlkey=b0pfiyoyghnf6nbcipykdt5pf&st=agmb7l02&raw=1", 
+              title: "Lower Third Graphic", 
+              desc: "Clean and modern lower third for on-stream talent identification." 
+            },
+            { 
+              // CORRECTED LINK: logointro.mov
+              src: "https://www.dropbox.com/scl/fi/oe170tiq8kxsw4hvmar8x/logointro.mov?rlkey=r415so3vk9mn6hagssxxgp5z4&st=rvq3yncs&raw=1", 
+              title: "Logo Intro Reveal", 
+              desc: "Dynamic logo reveal animation with impact sound design." 
+            }
         ];
         const mainPlayer = document.getElementById('mainPlayer');
         const mainTitle = document.getElementById('mainTitle');
