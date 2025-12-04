@@ -224,6 +224,16 @@
         .bio-title { font-size: 1.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 1.5rem; }
         .bio-text { color: #cccccc; font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
         .link-highlight { color: var(--text-color); background: rgba(255,255,255,0.1); padding: 0 5px; border-radius: 4px; }
+        
+        /* About Profile Pic */
+        .about-pfp {
+            width: 200px; height: 200px; 
+            object-fit: cover; 
+            border-radius: 30px; /* Rounded Square */
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            background-color: #111;
+        }
 
         .page-header { padding: 8rem 5% 1rem 5%; text-align: center; }
         .page-title {
@@ -301,7 +311,9 @@
         .card-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
-            opacity: 0.4; transition: transform 0.6s, opacity 0.4s; z-index: 0; filter: grayscale(100%);
+            opacity: 0.4; transition: transform 0.6s, opacity 0.4s; z-index: 0; 
+            /* Grayscale by default, active class removes it */
+            filter: grayscale(100%);
         }
         .work-card.active { 
             box-shadow: 0 0 40px var(--card-glow); border-color: var(--card-glow); z-index: 50; 
@@ -481,8 +493,6 @@
         }
         .influencer-name { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; text-transform: uppercase; color: white; margin-bottom: 0.5rem; }
         .influencer-role { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2.5rem; }
-        
-        /* UPDATED: Influencer Stats for horizontal icons */
         .influencer-stats { 
             display: flex; 
             flex-direction: row; /* Horizontal */
@@ -723,21 +733,29 @@
             <div class="deck-arrow arrow-left" onclick="moveDeck(-1)"><i class="fas fa-chevron-left"></i></div>
             <div class="deck-arrow arrow-right" onclick="moveDeck(1)"><i class="fas fa-chevron-right"></i></div>
             <div class="work-deck" id="cardDeck">
-                <!-- CARDS (Placeholders) - Data-index matches projectData array index -->
+                <!-- CARDS WITH SPECIFIC BACKGROUND IMAGES -->
+                
+                <!-- 0: RIOT GAMES (VALORANT (1).jpg) -->
                 <div class="work-card glow-red" data-index="0" onclick="showPage('riot')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FF4655?text=Riot+Games');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('VALORANT (1).jpg');"></div>
                     <div class="card-content"></div>
                 </div>
+                
+                <!-- 1: IMMORTALS (IMT (1).jpg) -->
                 <div class="work-card glow-teal" data-index="1" onclick="showPage('immortals')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/26E6C7?text=Immortals');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('IMT (1).jpg');"></div>
                     <div class="card-content"></div>
                 </div>
+                
+                <!-- 2: MARYVILLE (MU.jpg) -->
                 <div class="work-card glow-red" data-index="2" onclick="showPage('maryville')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FF4655?text=Maryville');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('MU.jpg');"></div>
                     <div class="card-content"></div>
                 </div>
+                
+                <!-- 3: OTTAWA (OU.jpg) -->
                 <div class="work-card glow-yellow" data-index="3" onclick="showPage('ottawa')">
-                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FFC700?text=Ottawa');"></div>
+                    <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('OU.jpg');"></div>
                     <div class="card-content"></div>
                 </div>
             </div>
@@ -1033,6 +1051,9 @@
     <div id="page-about" class="page-view">
         <header class="page-header"><h1 class="page-title">About</h1><p class="page-subtitle">The designer behind the screen.</p></header>
         <section class="bio-section-centered">
+            <!-- UPDATED: Profile Picture -->
+            <img src="pfp4.png" alt="Antonio Bautista-Foti" class="about-pfp">
+            
             <div class="bio-title">Antonio Bautista-Foti</div>
             <p class="bio-text" style="text-align: left;">
                 I'm Antonio, a visual designer and creative strategist based in St. Louis, MO, specializing in high-impact digital content and brand identity for the gaming and esports industry. 
@@ -1226,8 +1247,6 @@
             else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
             else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
             else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
-            
-            // UPDATED: Changed Influencer Glow from Red to Blue (#9DE8FF)
             else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#9DE8FF');
 
             if(pageId === 'work') setTimeout(updateDeck, 50);
@@ -1465,4 +1484,3 @@
     </script>
 </body>
 </html>
-
