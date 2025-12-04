@@ -341,7 +341,8 @@
             /* Default column size, auto fit for responsiveness */
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-auto-flow: dense; 
-            grid-auto-rows: 1fr; /* Default row size to make images equal height */
+            /* FIXED: Set rows to auto to allow content (image aspect ratio) to dictate height */
+            grid-auto-rows: auto; 
             gap: 1.5rem; 
             padding: 0 5% 6rem 5%;
             max-width: 1400px; 
@@ -356,7 +357,9 @@
             border: 1px solid rgba(255,255,255,0.1); 
             background: rgba(20,20,20,0.5); 
             transition: all 0.4s ease;
-            height: 100%; /* Important: makes grid item fill auto-row height */
+            height: auto; /* Allow height to be determined by content/grid auto-rows: auto */
+            /* Align items to the start so they don't stretch vertically if row is tall */
+            align-self: start;
         }
         .grid-item:hover {
             transform: translateY(-5px);
@@ -365,12 +368,13 @@
         }
         .grid-item img { 
             width: 100%; 
-            height: 100%; /* Image fills container height */
+            height: auto; /* Image scales naturally with container width */
             object-fit: cover; 
             display: block; 
             transition: transform 0.6s ease; 
-            min-height: 200px;
+            min-height: 100px; /* Lower min-height */
         }
+
         .grid-item:hover img { transform: scale(1.05); }
         
         .grid-caption {
@@ -806,24 +810,25 @@
         </div>
         <div class="project-grid">
             <!-- UPDATED IMAGES & CONTAINER FIT -->
-            <div class="grid-item row-span-2"><img src="100T_Gameday.jpg" alt="Match Day Vert"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
-            <div class="grid-item col-span-2"><img src="welcomesolo.jpg" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
-            <div class="grid-item row-span-2"><img src="100T_Gameday.jpg" alt="Tactical Match"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
-            <div class="grid-item col-span-2"><img src="promo.jpg" alt="Promo Wide"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-1" alt="Score 1-1"><div class="grid-caption">SCORE 1-1</div></div>
-            <div class="grid-item row-span-2"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-1" alt="Score 2-1"><div class="grid-caption">SCORE 2-1</div></div>
-            <div class="grid-item col-span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
-            <div class="grid-item col-span-2"><img src="week1.jpg" alt="1 Week Left"><div class="grid-caption">1 WEEK LEFT</div></div>
-            <div class="grid-item row-span-2"><img src="revenge.jpg" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
-            <div class="grid-item row-span-2"><img src="kenvi.jpg" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
-            <div class="grid-item row-span-2"><img src="ignar.jpg" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
-            <div class="grid-item row-span-2"><img src="lost1.jpg" alt="Lost"><div class="grid-caption">LOST</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Happy+Birthday" alt="Happy Birthday"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
+            <!-- Standard resolution respected (no row/col forcing) -->
+            <div class="grid-item"><img src="100T_Gameday.jpg" alt="Match Day Vert"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+            <div class="grid-item"><img src="welcomesolo.jpg" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
+            <div class="grid-item"><img src="100T_Gameday.jpg" alt="Tactical Match"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
+            <div class="grid-item"><img src="promo.jpg" alt="Promo Wide"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
+            <div class="grid-item"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
+            <div class="grid-item"><img src="100t_11.jpg" alt="Score 1-1"><div class="grid-caption">SCORE 1-1</div></div>
+            <div class="grid-item"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
+            <div class="grid-item"><img src="100t_21.jpg" alt="Score 2-1"><div class="grid-caption">SCORE 2-1</div></div>
+            <div class="grid-item"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item"><img src="week1.jpg" alt="1 Week Left"><div class="grid-caption">1 WEEK LEFT</div></div>
+            <div class="grid-item"><img src="revenge.jpg" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
+            <div class="grid-item"><img src="kenvi.jpg" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
+            <div class="grid-item"><img src="ignar.jpg" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
+            <div class="grid-item"><img src="lost1.jpg" alt="Lost"><div class="grid-caption">LOST</div></div>
+            <div class="grid-item"><img src="happybirthday_tactical.jpg" alt="Happy Birthday"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
+            <div class="grid-item"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
             <!-- ADDED TEAMFIGHT TACTICS -->
-            <div class="grid-item col-span-2"><img src="v1.jpg" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
+            <div class="grid-item"><img src="v1.jpg" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
         </div>
     </div>
     
@@ -1021,22 +1026,20 @@
             }
         ];
         
-        // DOM elements for Video Page
-        const mainPlayer = document.getElementById('mainPlayer');
-        const mainTitle = document.getElementById('mainTitle');
-        const mainDesc = document.getElementById('mainDesc');
-        const playlistContainer = document.getElementById('playlistSidebar');
-        
-        // Populates the playlist sidebar
-        // FIXED: Replaced inline onmouseover/onmouseout with safer event listeners to prevent AbortError
+        // DOM elements (initialized later)
+        let mainPlayer, mainTitle, mainDesc, playlistContainer, deckContainer, cards, backToTopBtn;
+
+        // -- GLOBAL FUNCTIONS --
+        // These must be defined in the global scope so onclick="" attributes work immediately.
+
         function renderPlaylist() {
+            if(!playlistContainer) return;
             playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
             videoList.forEach((vid, index) => {
                 const item = document.createElement('div');
                 item.className = 'video-thumbnail';
                 item.onclick = () => swapVideo(index);
                 
-                // Construct inner HTML without inline events for play/pause
                 item.innerHTML = `
                     <div class="thumb-img-wrapper">
                         <video 
@@ -1050,31 +1053,25 @@
                     </div>
                     <div class="thumb-info"><div class="thumb-title">${vid.title}</div></div>
                 `;
-                
-                // Attach safe event listeners
                 const video = item.querySelector('video');
                 if(video) {
                     item.addEventListener('mouseenter', () => {
                         const playPromise = video.play();
                         if (playPromise !== undefined) {
-                            playPromise.catch(error => {
-                                // Auto-play was prevented or interrupted, likely by fast mouse movement
-                                // We can ignore this specific error
-                            });
+                            playPromise.catch(error => { });
                         }
                     });
                     item.addEventListener('mouseleave', () => {
                         video.pause();
-                        video.currentTime = 2; // Reset preview
+                        video.currentTime = 2; 
                     });
                 }
-
                 playlistContainer.appendChild(item);
             });
         }
 
-        // Swaps the main video with a selected playlist video
         function swapVideo(index) {
+            if(!mainPlayer) return;
             const oldMain = { 
                 src: mainPlayer.getAttribute('src'), 
                 title: mainTitle.textContent, 
@@ -1082,29 +1079,26 @@
             };
             const selected = videoList[index];
             
-            // Swap main video source and content
             mainPlayer.src = selected.src; 
-            mainPlayer.load(); // Reload the video element to fetch the new source
+            mainPlayer.load(); 
             mainPlayer.play();
             mainTitle.textContent = selected.title; 
             mainDesc.textContent = selected.desc;
             
-            // Re-add the previous main video back to the end of the playlist array
             if(oldMain.src) {
                 videoList.splice(index, 1); 
                 videoList.push(oldMain);
             }
-            renderPlaylist(); // Rerender the updated playlist
+            renderPlaylist();
         }
 
-        // Handles page view switching and nav bar active state
         function showPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
             let btnToActive = document.getElementById('btn-' + pageId);
-            // Handle sub-pages: activate the 'Work' button for project pages
-            if(['immortals', 'maryville', 'riot', 'ottawa'].includes(pageId)) {
+            const isWorkPage = ['immortals', 'maryville', 'riot', 'ottawa'].includes(pageId);
+            if(isWorkPage) {
                 btnToActive = document.getElementById('btn-work');
             } 
             
@@ -1118,57 +1112,46 @@
                 window.scrollTo(0, 0);
             }
             
-            // Handle Back to Top button visibility
-            const backToTopBtn = document.getElementById('backToTop');
+            // Back to top visibility
             if (backToTopBtn) {
-                // Show on work/project pages, potentially hide on home/about if preferred, 
-                // but let's keep it consistent for "work pages" as requested.
-                // Or just show it globally when scrolled? 
-                // Request said "at the bottom of each works page".
-                if(['riot', 'immortals', 'maryville', 'ottawa', 'work'].includes(pageId)) {
-                    backToTopBtn.style.display = 'flex';
-                } else {
-                    backToTopBtn.style.display = 'none'; 
-                }
+                 if(isWorkPage || pageId === 'video' || pageId === 'influencers' || pageId === 'events') {
+                     backToTopBtn.style.display = 'flex';
+                 } else {
+                     backToTopBtn.style.display = 'none'; 
+                 }
             }
             
-            // Glow Color Logic (Changes the ambient glow based on the active page/project)
+            // Glow Logic
             const root = document.documentElement;
-            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); // Default Blue
-            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); // Teal
-            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); // Red
-            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); // Yellow
+            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
+            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); 
+            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
+            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
             else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
             else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#FF4655');
 
-            
-            // Trigger specific page functions
             if(pageId === 'work') setTimeout(updateDeck, 50);
             if(pageId === 'home') runStats();
             
-            // FIX: Explicitly tell the Twitter widget to render any tweets when the Riot page is shown
+            // Fix Twitter Widget Reload
             if (pageId === 'riot') {
-                // Small timeout to ensure DOM is ready and transition has started
                 setTimeout(() => {
                     if (typeof twttr !== 'undefined' && twttr.widgets) {
                         twttr.widgets.load(document.getElementById('riot-social-feed'));
                     }
-                }, 250); // Increased delay slightly
+                }, 250);
             }
         }
         
-        // Counter animation for the Home page stats section
         function runStats() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 let current = 0;
-                // Calculate increment to reach target in 100 steps
                 const increment = target / 100;
                 const updateCount = () => {
                     current += increment;
                     if(current < target) {
-                        // Use toFixed(1) for decimals like 1.1, else round for integers
                         counter.innerText = (target % 1 !== 0) ? current.toFixed(1) : Math.ceil(current);
                         requestAnimationFrame(updateCount);
                     } else {
@@ -1179,65 +1162,24 @@
             });
         }
         
-        // Deck & Slider Logic for the 'Work' page
+        // Deck Logic
         let currentIndex = 0;
-        const cards = document.querySelectorAll('.work-card');
         const projectData = [
             {title: "Riot Games", desc: "Global esports events and broadcast storytelling."},
             {title: "Immortals", desc: "Brand identity revitalization and strategic visuals."},
             {title: "Maryville University", desc: "Championship-winning visual identity for collegiate esports."},
             {title: "Ottawa University", desc: "Collegiate gaming initiatives and visual language."}
         ];
-        
-        function moveDeck(direction) {
-            currentIndex += direction;
-            if(currentIndex < 0) currentIndex = cards.length - 1;
-            if(currentIndex >= cards.length) currentIndex = 0;
-            updateDeck();
-        }
-        function selectCard(index) {
-            currentIndex = index;
-            updateDeck();
-        }
 
-        // Main function to update the card stack appearance and information box
-        function updateDeck() {
-            updateDeckVisuals(currentIndex);
-            const infoHeader = document.getElementById('info-header');
-            const infoDesc = document.getElementById('info-desc');
-            if(projectData[currentIndex]) {
-                infoHeader.textContent = projectData[currentIndex].title;
-                infoDesc.textContent = projectData[currentIndex].desc;
-            }
-            // Update horizontal selector pill position and color
-            const selectorItems = document.querySelectorAll('.selector-item');
-            const selectorPill = document.querySelector('.selector-pill');
-            if (selectorItems.length > 0 && selectorPill) {
-                selectorItems.forEach(item => item.classList.remove('active'));
-                const activeItem = selectorItems[currentIndex];
-                if (activeItem) {
-                    activeItem.classList.add('active');
-                    selectorPill.style.width = activeItem.offsetWidth + 'px';
-                    selectorPill.style.left = activeItem.offsetLeft + 'px';
-                    // Match pill color to the card glow color
-                    if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
-                    else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
-                    else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
-                    else if (currentIndex === 3) selectorPill.style.backgroundColor = '#FFC700';
-                }
-            }
-        }
-
-        // Applies 3D transform (translate, scale, rotate) to simulate a stack/deck
         function updateDeckVisuals(floatIndex) {
+            if(!cards) return;
             if(floatIndex < 0) floatIndex = 0;
             if(floatIndex > cards.length - 1) floatIndex = cards.length - 1;
             cards.forEach((card, index) => {
                 let diff = index - floatIndex;
-                if (Math.abs(diff) < 0.1) card.classList.add('active'); // Center card is active
+                if (Math.abs(diff) < 0.1) card.classList.add('active'); 
                 else card.classList.remove('active');
 
-                // 3D positioning logic
                 if (Math.abs(diff) < 0.1) {
                     card.style.transform = `translateX(0) scale(1) rotate(0deg)`;
                     card.style.zIndex = 100;
@@ -1253,7 +1195,8 @@
                     card.style.opacity = 1 - (absDiff * 0.2);
                 }
             });
-            // Update page glow and text color to match the centered card
+            
+            // Update colors
             let nearestIndex = Math.round(floatIndex);
             let color = '#9DE8FF'; 
             if (nearestIndex === 0) color = '#FF4655';
@@ -1271,44 +1214,71 @@
             }
         }
         
-        // DRAG AND SWIPE LOGIC
-        const deckContainer = document.getElementById('workDeckContainer');
+        function updateDeck() {
+            updateDeckVisuals(currentIndex);
+            const infoHeader = document.getElementById('info-header');
+            const infoDesc = document.getElementById('info-desc');
+            if(projectData[currentIndex]) {
+                infoHeader.textContent = projectData[currentIndex].title;
+                infoDesc.textContent = projectData[currentIndex].desc;
+            }
+            const selectorItems = document.querySelectorAll('.selector-item');
+            const selectorPill = document.querySelector('.selector-pill');
+            if (selectorItems.length > 0 && selectorPill) {
+                selectorItems.forEach(item => item.classList.remove('active'));
+                const activeItem = selectorItems[currentIndex];
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                    selectorPill.style.width = activeItem.offsetWidth + 'px';
+                    selectorPill.style.left = activeItem.offsetLeft + 'px';
+                    if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
+                    else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIndex === 3) selectorPill.style.backgroundColor = '#FFC700';
+                }
+            }
+        }
+        
+        function moveDeck(direction) {
+            if(!cards) return;
+            currentIndex += direction;
+            if(currentIndex < 0) currentIndex = cards.length - 1;
+            if(currentIndex >= cards.length) currentIndex = 0;
+            updateDeck();
+        }
+        function selectCard(index) {
+            currentIndex = index;
+            updateDeck();
+        }
+
+        // Drag Logic
         let isDragging = false;
         let startX = 0;
-        let startDist = 0;
-        let currentTranslate = 0;
-        let animationID;
         let startVal = 0;
 
         function startDrag(e) {
-            // Check if clicking a link or something interactive inside card if needed
-            // But generally start dragging
+            if (!deckContainer) return;
             isDragging = true;
-            // Get X position from mouse or touch
             if (e.type === 'touchstart') {
                 startX = e.touches[0].pageX;
             } else {
                 startX = e.pageX;
             }
             startVal = currentIndex;
-            // Stop any snapping animations if we were animating
-            cancelAnimationFrame(animationID);
             deckContainer.style.cursor = 'grabbing';
         }
 
         function endDrag() {
             if (!isDragging) return;
             isDragging = false;
-            deckContainer.style.cursor = 'grab';
-            
-            // Snap to nearest integer index
+            if (deckContainer) deckContainer.style.cursor = 'grab';
             const finalIndex = Math.round(currentIndex);
             snapToCard(finalIndex);
         }
 
         function moveDrag(e) {
             if (!isDragging) return;
-            e.preventDefault(); // Prevent scrolling on touch
+            e.preventDefault(); 
             let currentX;
             if (e.type === 'touchmove') {
                 currentX = e.touches[0].pageX;
@@ -1317,13 +1287,11 @@
             }
             
             const diff = startX - currentX;
-            // Sensitivity: 200px drag = 1 full card shift
             const shift = diff / 200; 
             let newVal = startVal + shift;
             
-            // Boundary checks with resistance
-            if (newVal < 0) newVal = newVal * 0.3; // Resistance at start
-            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; // Resistance at end
+            if (newVal < 0) newVal = newVal * 0.3; 
+            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; 
 
             currentIndex = newVal;
             updateDeckVisuals(currentIndex);
@@ -1332,29 +1300,54 @@
         function snapToCard(targetIndex) {
             if (targetIndex < 0) targetIndex = 0;
             if (targetIndex > cards.length - 1) targetIndex = cards.length - 1;
-            
             currentIndex = targetIndex;
-            updateDeck(); // This snaps visual + updates text info
+            updateDeck();
         }
 
-        // Attach listeners
-        if (deckContainer) {
-            deckContainer.addEventListener('mousedown', startDrag);
-            deckContainer.addEventListener('touchstart', startDrag);
-            
-            deckContainer.addEventListener('mouseup', endDrag);
-            deckContainer.addEventListener('mouseleave', endDrag);
-            deckContainer.addEventListener('touchend', endDrag);
-            
-            deckContainer.addEventListener('mousemove', moveDrag);
-            deckContainer.addEventListener('touchmove', moveDrag);
-        }
-
-        
-        // Initialize on page load
+        // -- INITIALIZATION --
         document.addEventListener('DOMContentLoaded', () => { 
+            // Assign DOM elements now that they exist
+            mainPlayer = document.getElementById('mainPlayer');
+            mainTitle = document.getElementById('mainTitle');
+            mainDesc = document.getElementById('mainDesc');
+            playlistContainer = document.getElementById('playlistSidebar');
+            deckContainer = document.getElementById('workDeckContainer');
+            cards = document.querySelectorAll('.work-card');
+            backToTopBtn = document.getElementById('backToTop');
+
             if(playlistContainer) renderPlaylist();
-            showPage('home'); // Start on the Home page
+            
+            if (deckContainer) {
+                deckContainer.addEventListener('mousedown', startDrag);
+                deckContainer.addEventListener('touchstart', startDrag);
+                
+                document.addEventListener('mouseup', endDrag);
+                deckContainer.addEventListener('mouseleave', endDrag);
+                document.addEventListener('touchend', endDrag);
+                
+                deckContainer.addEventListener('mousemove', moveDrag);
+                deckContainer.addEventListener('touchmove', moveDrag);
+            }
+            
+            // Scroll listener
+            window.addEventListener('scroll', () => {
+                if (backToTopBtn) {
+                    const activePage = document.querySelector('.page-view.active');
+                    const activeId = activePage ? activePage.id.replace('page-', '') : 'home';
+
+                    if (['riot', 'immortals', 'maryville', 'ottawa', 'work', 'video', 'influencers', 'events'].includes(activeId)) {
+                        if (window.scrollY > 300) {
+                            backToTopBtn.style.display = 'flex';
+                        } else {
+                            backToTopBtn.style.display = 'none';
+                        }
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
+                }
+            });
+
+            showPage('home'); 
         });
     </script>
 </body>
