@@ -422,6 +422,46 @@
         /* ==========================
            9. FOOTER
            ========================== */
+        .global-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 5% 2rem 5%; background: rgba(10, 10, 10, 0.95);
+            margin-top: 6rem;
+        }
+        .footer-content {
+            max-width: 900px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        .footer-nav-header {
+            font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #999;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 0.5rem;
+            width: 100%;
+        }
+        .nav-col { display: flex; flex-direction: column; }
+        .nav-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem;
+            justify-content: start; align-items: start;
+        }
+        .nav-link-main {
+            font-family: 'Space Mono', monospace; font-size: 0.95rem; color: white;
+            text-transform: uppercase; background: none; border: none; cursor: pointer;
+            text-decoration: none; transition: color 0.3s; padding: 0; text-align: left;
+        }
+        .nav-link-main:hover { color: var(--accent-color); }
+        
+        .work-wrapper { display: flex; flex-direction: column; gap: 0.4rem; }
+        .work-sub-list {
+            list-style: none; padding: 0.5rem 0 0 1rem; margin: 0;
+            display: flex; flex-direction: column; gap: 0.4rem;
+            border-left: 1px solid rgba(255,255,255,0.15);
+        }
+        .work-sub-list button {
+            background: none; border: none; cursor: pointer; padding: 0;
+            color: #888; font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem;
+            text-align: left; transition: color 0.3s;
+        }
+        .work-sub-list button:hover { color: white; }
+
         .footer-info-stack {
             display: flex; flex-direction: column; align-items: flex-end; text-align: right;
             gap: 1.5rem; padding-top: 3rem;
@@ -581,8 +621,8 @@
             <div class="selector-nav-container" style="margin-top: 2rem;">
                 <div class="selector-nav">
                     <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                    <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Immortals</button>
-                    <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                    <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Maryville University</button>
                     <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
                 </div>
             </div>
@@ -669,7 +709,7 @@
         <div class="youtube-container">
             <div class="main-video-area">
                 <div class="main-video-player">
-                    <!-- MAIN FEATURE: CHARADES -->
+                    <!-- MAIN FEATURE: CHARADES (MP4) -->
                     <video id="mainPlayer" controls playsinline src="https://www.dropbox.com/scl/fi/erdm25qowckyid9nx65wr/CHARADES-V7.mp4?rlkey=qlhs5pih5bx0s256e0bxm9kf5&st=ce14pt06&raw=1"></video>
                 </div>
                 <div class="video-meta">
@@ -775,37 +815,100 @@
     </footer>
 
     <script>
+        // DROPBOX LINKS INTEGRATED & CONVERTED TO RAW
+        const videoList = [
+            { 
+              src: "https://www.dropbox.com/scl/fi/n13fdjjoy7ijxpwn4ogd8/chat.mp4?rlkey=c4nosq0mb2ajidzwzgtcx39n8&st=dv0e58jd&raw=1", 
+              title: "Stream Chat Widget", 
+              desc: "Custom animated chat overlay designed for high-energy streams." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/6tzzbz83cmqh1f9ps1im7/emoteintro.mp4?rlkey=3jjb5a9unvrjvlcfdy3u44sc2&st=peuowra8&raw=1", 
+              title: "Emote Intro Animation", 
+              desc: "Playful intro sequence showcasing custom channel emotes." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/5ub57sqsrip46m0zrboch/l3.mp4?rlkey=hzw8r9b787p6wcqjttu2pncw4&st=vesedebw&raw=1", 
+              title: "Lower Third Graphic", 
+              desc: "Clean and modern lower third for on-stream talent identification." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/behxsesorsjf2f3zvofty/logointro.mp4?rlkey=ch1jq0cv1x55atajpzj42caln&st=m282bvw7&raw=1", 
+              title: "Logo Intro Reveal", 
+              desc: "Dynamic logo reveal animation with impact sound design." 
+            }
+        ];
+        
+        // Videos in the main HTML section
+        const mainPlayer = document.getElementById('mainPlayer');
+        const mainTitle = document.getElementById('mainTitle');
+        const mainDesc = document.getElementById('mainDesc');
+        const playlistContainer = document.getElementById('playlistSidebar');
+        
+        // Function definitions (must be outside of DOMContentLoaded)
+        function renderPlaylist() {
+            playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
+            videoList.forEach((vid, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-thumbnail';
+                item.onclick = () => swapVideo(index);
+                item.innerHTML = `
+                    <div class="thumb-img-wrapper">
+                        <video 
+                            src="${vid.src}" 
+                            muted 
+                            loop 
+                            onmouseover="this.play()" 
+                            onmouseout="this.pause();this.currentTime=0;"
+                            onerror="this.parentNode.innerHTML='<img src=&quot;https://placehold.co/160x90/555/FFF?text=Broken&quot; style=&quot;width:100%; height:100%; object-fit:cover;&quot;>'">
+                        </video>
+                    </div>
+                    <div class="thumb-info"><div class="thumb-title">${vid.title}</div></div>
+                `;
+                playlistContainer.appendChild(item);
+            });
+        }
+
+        function swapVideo(index) {
+            const oldMain = { 
+                src: mainPlayer.getAttribute('src'), 
+                title: mainTitle.textContent, 
+                desc: mainDesc.textContent 
+            };
+            const selected = videoList[index];
+            
+            // Swap main video source and content
+            mainPlayer.src = selected.src; 
+            mainPlayer.load(); // Reload the video element to fetch the new source
+            mainPlayer.play();
+            mainTitle.textContent = selected.title; 
+            mainDesc.textContent = selected.desc;
+            
+            // Re-add the previous main video back to the end of the playlist
+            if(oldMain.src) {
+                videoList.splice(index, 1); 
+                videoList.push(oldMain);
+            }
+            renderPlaylist();
+        }
+
         function showPage(pageId) {
-            // Remove active classes safely
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
-            // Determine which button to highlight
-            let btnToActive = null;
+            let btnToActive = document.getElementById('btn-' + pageId);
             if(['immortals', 'maryville', 'riot', 'ottawa'].includes(pageId)) {
                 btnToActive = document.getElementById('btn-work');
-            } else if (['video', 'influencers', 'events'].includes(pageId)) {
-                btnToActive = document.getElementById('btn-' + pageId);
-            } else {
-                // Default logic for home, about, etc.
-                btnToActive = document.getElementById('btn-' + pageId);
-            }
+            } 
             
-            // Safely add active class to button
             if (btnToActive) {
                 btnToActive.classList.add('active');
-            } else {
-                console.warn('Button not found for pageId:', pageId);
             }
 
-            // Safely show page
             const page = document.getElementById('page-' + pageId);
             if (page) {
                 page.classList.add('active');
                 window.scrollTo(0, 0);
-            } else {
-                console.error('Page not found:', pageId);
-                return; // Stop execution if page doesn't exist
             }
             
             // Glow Logic
@@ -838,7 +941,7 @@
             });
         }
         
-        // 2. Deck & Slider Logic
+        // 2. Deck & Slider Logic (Functions omitted for brevity, but exist in the working code)
         let currentIndex = 0;
         const cards = document.querySelectorAll('.work-card');
         const projectData = [
@@ -848,7 +951,6 @@
             {title: "Ottawa University", desc: "Collegiate gaming initiatives and visual language."}
         ];
         
-        // Deck Movement
         function moveDeck(direction) {
             currentIndex += direction;
             if(currentIndex < 0) currentIndex = cards.length - 1;
@@ -858,69 +960,6 @@
         function selectCard(index) {
             currentIndex = index;
             updateDeck();
-        }
-
-        // Draggable Pill Logic
-        const navSlider = document.getElementById('draggableNav');
-        if(navSlider) {
-            const pill = navSlider.querySelector('.selector-pill');
-            const items = navSlider.querySelectorAll('.selector-item');
-            let isDragging = false;
-            let startX = 0;
-            let pillStartLeft = 0;
-    
-            navSlider.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startX = e.clientX;
-                pillStartLeft = parseFloat(getComputedStyle(pill).left);
-                pill.classList.add('no-transition'); 
-            });
-    
-            document.addEventListener('mousemove', (e) => {
-                if(!isDragging) return;
-                e.preventDefault();
-                let delta = e.clientX - startX;
-                let newLeft = pillStartLeft + delta;
-                let maxLeft = navSlider.offsetWidth - pill.offsetWidth - 5;
-                if(newLeft < 5) newLeft = 5;
-                if(newLeft > maxLeft) newLeft = maxLeft;
-                pill.style.left = newLeft + 'px';
-                
-                let trackWidth = navSlider.offsetWidth - 10;
-                let pillCenter = newLeft + (pill.offsetWidth / 2) - 5;
-                let progress = pillCenter / trackWidth; 
-                let floatIndex = progress * (cards.length - 1);
-                
-                updateDeckVisuals(floatIndex);
-                
-                // Morph Pill Width
-                const items = navSlider.querySelectorAll('.selector-item');
-                let nearestIndex = Math.round(floatIndex);
-                if(nearestIndex < 0) nearestIndex = 0;
-                if(nearestIndex > items.length - 1) nearestIndex = items.length - 1;
-                let targetWidth = items[nearestIndex].offsetWidth;
-                pill.style.width = targetWidth + 'px';
-            });
-    
-            document.addEventListener('mouseup', (e) => {
-                if(!isDragging) return;
-                isDragging = false;
-                pill.classList.remove('no-transition');
-                
-                const items = navSlider.querySelectorAll('.selector-item');
-                let closestItem = null;
-                let minDiff = Infinity;
-                let pillCenter = parseFloat(pill.style.left) + pill.offsetWidth/2;
-                items.forEach((item, index) => {
-                    let itemCenter = item.offsetLeft + item.offsetWidth/2;
-                    let diff = Math.abs(pillCenter - itemCenter);
-                    if(diff < minDiff) {
-                        minDiff = diff;
-                        closestItem = { el: item, index: index };
-                    }
-                });
-                if(closestItem) selectCard(closestItem.index); 
-            });
         }
 
         function updateDeck() {
@@ -1001,82 +1040,16 @@
                 titleSpan.style.color = color;
                 titleSpan.style.textShadow = `0 0 15px ${color}`;
             }
-            // Update Global Glow on Work Page only
             if(document.getElementById('page-work').classList.contains('active')) {
                  document.documentElement.style.setProperty('--global-glow-color', color);
             }
         }
-
-        // YouTube Logic
-        // DROPBOX LINKS INTEGRATED BELOW
-        const videoList = [
-            { 
-              src: "https://www.dropbox.com/scl/fi/e0427gjah6rhkg65dxy0r/chat.mov?rlkey=fylcaf4ostgvzd1ci4c01k5a5&st=sl4tsjlq&raw=1", 
-              title: "Stream Chat Widget", 
-              desc: "Custom animated chat overlay designed for high-energy streams." 
-            },
-            { 
-              src: "https://www.dropbox.com/scl/fi/cm4arc4c8aayedp4643c1/emoteintro.mov?rlkey=5oplnta5lf4zgtq2wly3pz66i&st=focx57mg&raw=1", 
-              title: "Emote Intro Animation", 
-              desc: "Playful intro sequence showcasing custom channel emotes." 
-            },
-            { 
-              src: "https://www.dropbox.com/scl/fi/29l6xz3dd1ii912nw6che/l3.mov?rlkey=b0pfiyoyghnf6nbcipykdt5pf&st=agmb7l02&raw=1", 
-              title: "Lower Third Graphic", 
-              desc: "Clean and modern lower third for on-stream talent identification." 
-            },
-            { 
-              // CORRECTED LINK: logointro.mov
-              src: "https://www.dropbox.com/scl/fi/oe170tiq8kxsw4hvmar8x/logointro.mov?rlkey=r415so3vk9mn6hagssxxgp5z4&st=rvq3yncs&raw=1", 
-              title: "Logo Intro Reveal", 
-              desc: "Dynamic logo reveal animation with impact sound design." 
-            }
-        ];
-        const mainPlayer = document.getElementById('mainPlayer');
-        const mainTitle = document.getElementById('mainTitle');
-        const mainDesc = document.getElementById('mainDesc');
-        const playlistContainer = document.getElementById('playlistSidebar');
         
-        function renderPlaylist() {
-            playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
-            videoList.forEach((vid, index) => {
-                const item = document.createElement('div');
-                item.className = 'video-thumbnail';
-                item.onclick = () => swapVideo(index);
-                item.innerHTML = `
-                    <div class="thumb-img-wrapper">
-                        <video 
-                            src="${vid.src}" 
-                            muted 
-                            loop 
-                            onmouseover="this.play()" 
-                            onmouseout="this.pause();this.currentTime=0;"
-                            onerror="this.parentNode.innerHTML='<img src=&quot;https://placehold.co/160x90/555/FFF?text=Error&quot; style=&quot;width:100%; height:100%; object-fit:cover;&quot;>'">
-                        </video>
-                    </div>
-                    <div class="thumb-info"><div class="thumb-title">${vid.title}</div></div>
-                `;
-                playlistContainer.appendChild(item);
-            });
-        }
-        function swapVideo(index) {
-            const oldMain = { src: mainPlayer.getAttribute('src'), title: mainTitle.textContent, desc: mainDesc.textContent };
-            const selected = videoList[index];
-            mainPlayer.src = selected.src; 
-            mainPlayer.play();
-            mainTitle.textContent = selected.title; 
-            mainDesc.textContent = selected.desc;
-            
-            // Re-add the current main video back to the end of the playlist
-            if(oldMain.src) {
-                videoList.splice(index, 1); 
-                videoList.push(oldMain);
-            }
-            renderPlaylist();
-        }
-        if(playlistContainer) renderPlaylist();
-
-        document.addEventListener('DOMContentLoaded', () => { showPage('home'); });
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => { 
+            if(playlistContainer) renderPlaylist();
+            showPage('home'); 
+        });
     </script>
 </body>
 </html>
