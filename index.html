@@ -72,7 +72,9 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: -1; 
             background: radial-gradient(ellipse at center, transparent 70%, var(--global-glow-color) 160%);
-            opacity: 0.15; mix-blend-mode: screen;
+            /* UPDATED: Increased opacity by 3% (0.15 -> 0.18) */
+            opacity: 0.18; 
+            mix-blend-mode: screen;
             transition: background 0.8s ease; 
             animation: glow-wave 5s ease-in-out infinite;
         }
@@ -479,9 +481,28 @@
         }
         .influencer-name { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; text-transform: uppercase; color: white; margin-bottom: 0.5rem; }
         .influencer-role { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2.5rem; }
-        .influencer-stats { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
-        .stat-row { display: flex; align-items: center; justify-content: center; gap: 1rem; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #cccccc; }
-        .stat-row i { font-size: 1.4rem; color: white; width: 30px; }
+        
+        /* UPDATED: Influencer Stats for horizontal icons */
+        .influencer-stats { 
+            display: flex; 
+            flex-direction: row; /* Horizontal */
+            gap: 1.5rem; 
+            width: 100%; 
+            justify-content: center;
+        }
+        
+        .social-link {
+            text-decoration: none;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .social-link:hover {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+
+        .stat-row { display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #cccccc; }
+        .stat-row i { font-size: 1.6rem; color: white; width: auto; transition: color 0.3s; }
+        .stat-row:hover i { color: var(--accent-color); }
 
         /* ==========================
            9. FOOTER
@@ -852,23 +873,23 @@
         <!-- IMMORTALS LAYOUT: 4 Columns -->
         <div class="project-grid grid-4-cols">
             <!-- Row 1: Player Portraits -->
-            <div class="grid-item"><img src="ignar.jpg" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
-            <div class="grid-item"><img src="lost1.jpg" alt="Lost"><div class="grid-caption">LOST</div></div>
-            <div class="grid-item"><img src="kenvi.jpg" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
-            <div class="grid-item"><img src="revenge.jpg" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x500/111/26E6C7?text=IGNAR" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x500/111/26E6C7?text=LOST" alt="Lost"><div class="grid-caption">LOST</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x500/111/26E6C7?text=KENVI" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x500/111/26E6C7?text=REVENGE" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
 
             <!-- Row 2: Large Graphics (Span 2 cols each) -->
-            <div class="grid-item span-2"><img src="welcomesolo.jpg" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
-            <div class="grid-item span-2"><img src="v1.jpg" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
+            <div class="grid-item span-2"><img src="https://placehold.co/800x400/111/26E6C7?text=WELCOME+SOLO" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
+            <div class="grid-item span-2"><img src="https://placehold.co/800x400/111/26E6C7?text=TEAMFIGHT+TACTICS" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
 
             <!-- Row 3: Large Graphics (Span 2 cols each) -->
-            <div class="grid-item span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
-            <div class="grid-item span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
+            <div class="grid-item span-2"><img src="https://placehold.co/800x400/111/26E6C7?text=3+DAYS+LEFT" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item span-2"><img src="https://placehold.co/800x400/111/26E6C7?text=24+HOUR+WINNER" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
 
             <!-- Row 4: Match Graphics (Standard 1 col) -->
-            <div class="grid-item"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
-            <div class="grid-item"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
-            <div class="grid-item"><img src="100T_Gameday.jpg" alt="Match Day"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/26E6C7?text=SCORE+2-0" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/26E6C7?text=SCORE+1-0" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/26E6C7?text=MATCH+DAY" alt="Match Day"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
         </div>
     </div>
     
@@ -890,24 +911,24 @@
         <!-- MARYVILLE LAYOUT: 3 Columns -->
         <div class="project-grid grid-3-cols">
             <!-- Row 1 -->
-            <div class="grid-item"><img src="ow_nationalchampionship.jpg" alt="Nat Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
-            <div class="grid-item"><img src="OW_TECH.jpg" alt="Champions"><div class="grid-caption">CHAMPIONS</div></div>
-            <div class="grid-item"><img src="val_nace_finals.jpg" alt="NACE Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=NAT+CHAMPS" alt="Nat Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=CHAMPIONS" alt="Champions"><div class="grid-caption">CHAMPIONS</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=NACE+FINALS" alt="NACE Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
             
             <!-- Row 2 -->
-            <div class="grid-item"><img src="comesdowntothis_joobi.jpg" alt="It All Comes Down To This"><div class="grid-caption">IT ALL COMES DOWN TO THIS</div></div>
-            <div class="grid-item"><img src="iced_redbirds.jpg" alt="Zach Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
-            <div class="grid-item"><img src="battleforthenorth_zyko.jpg" alt="Battle for the North"><div class="grid-caption">BATTLE FOR THE NORTH</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=COMES+DOWN+TO+THIS" alt="It All Comes Down To This"><div class="grid-caption">IT ALL COMES DOWN TO THIS</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=ZACH+HUGHES" alt="Zach Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=BATTLE+FOR+THE+NORTH" alt="Battle for the North"><div class="grid-caption">BATTLE FOR THE NORTH</div></div>
             
             <!-- Row 3 -->
-            <div class="grid-item"><img src="10k.jpg" alt="10K Milestone"><div class="grid-caption">10K MILESTONE</div></div>
-            <div class="grid-item"><img src="vision_ow.jpg" alt="Welcome Vision"><div class="grid-caption">WELCOME VISION</div></div>
-            <div class="grid-item"><img src="welcome_squid.jpg" alt="Welcome Squid"><div class="grid-caption">WELCOME SQUID</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=10K+MILESTONE" alt="10K Milestone"><div class="grid-caption">10K MILESTONE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=WELCOME+VISION" alt="Welcome Vision"><div class="grid-caption">WELCOME VISION</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=WELCOME+SQUID" alt="Welcome Squid"><div class="grid-caption">WELCOME SQUID</div></div>
             
             <!-- Row 4 -->
-            <div class="grid-item"><img src="final_v2.jpg" alt="Welcome Back Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
-            <div class="grid-item"><img src="zamudo.jpg" alt="Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
-            <div class="grid-item"><img src="nacl_schedule.jpg" alt="NACL Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=WELCOME+BACK" alt="Welcome Back Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=WELCOME+ZAMUDO" alt="Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
+            <div class="grid-item"><img src="https://placehold.co/400x400/111/FF4655?text=NACL+SCHEDULE" alt="NACL Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
         </div>
     </div>
     
@@ -929,16 +950,16 @@
         <!-- OTTAWA LAYOUT: 2 Columns -->
         <div class="project-grid grid-2-cols">
             <!-- Row 1 -->
-            <div class="grid-item"><img src="welcomecleave.jpg" alt="Cleave"><div class="grid-caption">SOCIAL INTERN CLEAVE</div></div>
-            <div class="grid-item"><img src="welcomekaya.jpg" alt="Kaya"><div class="grid-caption">SOCIAL INTERN KAYA</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=SOCIAL+INTERN+CLEAVE" alt="Cleave"><div class="grid-caption">SOCIAL INTERN CLEAVE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=SOCIAL+INTERN+KAYA" alt="Kaya"><div class="grid-caption">SOCIAL INTERN KAYA</div></div>
             
             <!-- Row 2 -->
-            <div class="grid-item"><img src="welcomeyung.jpg" alt="Welcome Yung"><div class="grid-caption">WELCOME YUNG</div></div>
-            <div class="grid-item"><img src="ottawacommitted.jpg" alt="Committed"><div class="grid-caption">OFFICIALLY COMMITTED</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=WELCOME+YUNG" alt="Welcome Yung"><div class="grid-caption">WELCOME YUNG</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=COMMITTED" alt="Committed"><div class="grid-caption">OFFICIALLY COMMITTED</div></div>
             
             <!-- Row 3 -->
-            <div class="grid-item"><img src="ottawaroster.jpg" alt="Roster"><div class="grid-caption">OFFICIAL ROSTER</div></div>
-            <div class="grid-item"><img src="womenofottawa.jpg" alt="Women"><div class="grid-caption">WOMEN OF OTTAWA</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=OFFICIAL+ROSTER" alt="Roster"><div class="grid-caption">OFFICIAL ROSTER</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/111/FFC700?text=WOMEN+OF+OTTAWA" alt="Women"><div class="grid-caption">WOMEN OF OTTAWA</div></div>
         </div>
     </div>
     
@@ -965,39 +986,45 @@
         </div>
     </div>
 
+    <!-- UPDATED: Influencer Section with New Images, Links, and Layout -->
     <div id="page-influencers" class="page-view">
         <header class="page-header"><h1 class="page-title">Influencers</h1><p class="page-subtitle">Connecting brands with personalities.</p></header>
         <div class="influencer-grid">
             <!-- YouGelly -->
             <div class="influencer-card">
-                <img src="https://placehold.co/200x200/222/FFF?text=YouGelly" alt="YouGelly" class="influencer-img">
+                <!-- UPDATED Image -->
+                <img src="YouGelly.png" alt="YouGelly" class="influencer-img">
                 <h3 class="influencer-name">YouGelly</h3>
                 <p class="influencer-role">TFT & League Streamer</p>
+                <!-- UPDATED Links -->
                 <div class="influencer-stats">
-                    <div class="stat-row"><i class="fab fa-twitch"></i><span>42K Followers</span></div>
-                    <div class="stat-row"><i class="fab fa-twitter"></i><span>42K Followers</span></div>
-                    <div class="stat-row"><i class="fab fa-instagram"></i><span>22.4K Followers</span></div>
+                    <a href="https://www.twitch.tv/yougelly" target="_blank" class="stat-row social-link"><i class="fab fa-twitch"></i></a>
+                    <a href="https://x.com/yougellyy" target="_blank" class="stat-row social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/yougelly/" target="_blank" class="stat-row social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <!-- ChiefBeef -->
             <div class="influencer-card">
-                <img src="https://placehold.co/200x200/222/FFF?text=ChiefBeef" alt="ChiefBeef" class="influencer-img">
+                <!-- UPDATED Image -->
+                <img src="ChiefBeef.png" alt="ChiefBeef" class="influencer-img">
                 <h3 class="influencer-name">ChiefBeef</h3>
                 <p class="influencer-role">Rocket League Streamer</p>
+                <!-- UPDATED Links -->
                 <div class="influencer-stats">
-                    <div class="stat-row"><i class="fab fa-twitch"></i><span>86K Followers</span></div>
-                    <div class="stat-row"><i class="fab fa-twitter"></i><span>3.8K Followers</span></div>
+                    <a href="https://www.twitch.tv/chiefbeef_rl" target="_blank" class="stat-row social-link"><i class="fab fa-twitch"></i></a>
+                    <a href="https://x.com/ChiefBeef_rl" target="_blank" class="stat-row social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <!-- Avery -->
             <div class="influencer-card">
-                <img src="https://placehold.co/200x200/222/FFF?text=Avery" alt="Avery" class="influencer-img">
+                <!-- UPDATED Image -->
+                <img src="Avery.png" alt="Avery" class="influencer-img">
                 <h3 class="influencer-name">Avery</h3>
                 <p class="influencer-role">Variety Streamer</p>
+                <!-- UPDATED Links -->
                 <div class="influencer-stats">
-                    <div class="stat-row"><i class="fab fa-twitch"></i><span>152K Followers</span></div>
-                    <div class="stat-row"><i class="fab fa-twitter"></i><span>43K Followers</span></div>
-                    <div class="stat-row"><i class="fab fa-instagram"></i><span>19.1K Followers</span></div>
+                    <a href="https://twitch.tv/avery" target="_blank" class="stat-row social-link"><i class="fab fa-twitch"></i></a>
+                    <a href="https://x.com/AveryHam" target="_blank" class="stat-row social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
@@ -1154,7 +1181,16 @@
             renderPlaylist();
         }
 
-        function showPage(pageId) {
+        // UPDATED: Added pushState param to handle history logic
+        function showPage(pageId, manageHistory = true) {
+            
+            // 1. History API Logic
+            // Only push a new state if manageHistory is true
+            if(manageHistory) {
+                // We push an object with the page ID, a title (unused by most browsers), and the hash URL
+                history.pushState({ pageId: pageId }, "", "#" + pageId);
+            }
+
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
@@ -1190,7 +1226,9 @@
             else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
             else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
             else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
-            else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#FF4655');
+            
+            // UPDATED: Changed Influencer Glow from Red to Blue (#9DE8FF)
+            else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#9DE8FF');
 
             if(pageId === 'work') setTimeout(updateDeck, 50);
             if(pageId === 'home') runStats();
@@ -1399,12 +1437,31 @@
                 }
             });
 
-            showPage('home'); 
+            // UPDATED: Handle initial load (Check URL Hash)
+            const initialHash = window.location.hash.replace('#', '');
+            if(initialHash && document.getElementById('page-' + initialHash)) {
+                // Pass false so we don't push the state again on load
+                showPage(initialHash, false);
+            } else {
+                // Pass false to not clutter history with initial "home" state
+                showPage('home', false); 
+            }
+            
             updateDeck();
         });
+
+        // UPDATED: Listen for browser Back/Forward buttons
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.pageId) {
+                // User went back/forward to a known state.
+                // Pass false so we don't push a NEW state while going back.
+                showPage(event.state.pageId, false);
+            } else {
+                // If there's no state (e.g. they went back to the very first load), default to Home
+                showPage('home', false);
+            }
+        });
+
     </script>
 </body>
 </html>
-
-
-
