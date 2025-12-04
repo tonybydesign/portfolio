@@ -42,6 +42,9 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            min-height: 100vh; /* Ensure body takes up full height */
+            display: flex;
+            flex-direction: column;
         }
 
         h1, h2, h3, h4, h5, h6, .bio-title, .section-title, .page-title { 
@@ -82,6 +85,7 @@
         .page-view {
             display: none; 
             animation: fadeIn 0.6s ease-out;
+            flex: 1; /* Allow content to push footer down */
         }
         .page-view.active { display: block; }
 
@@ -534,6 +538,16 @@
             text-align: left; transition: color 0.3s;
         }
         .work-sub-list button:hover { color: white; }
+
+        .footer-info-stack {
+            display: flex; flex-direction: column; align-items: flex-end; text-align: right;
+            gap: 1.5rem; padding-top: 3rem;
+        }
+        .location-text { color: #888; font-size: 0.9rem; font-family: 'Space Grotesk', sans-serif; }
+        .social-icons { display: flex; gap: 1.2rem; }
+        .social-icons a { color: white; font-size: 1.2rem; transition: color 0.3s; }
+        .social-icons a:hover { color: var(--accent-color); }
+        .copyright { color: #444; font-size: 0.7rem; font-family: 'Space Grotesk', sans-serif; margin-top: auto; }
 
         /* Media Queries - Responsive Design */
         @media(max-width: 1050px) {
@@ -1129,37 +1143,43 @@
                  }
             }
             
-            // Glow Logic
+            // Glow Color Logic (Changes the ambient glow based on the active page/project)
             const root = document.documentElement;
-            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
-            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); 
-            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
-            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
+            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); // Default Blue
+            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); // Teal
+            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); // Red
+            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); // Yellow
             else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
             else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#FF4655');
 
+            
+            // Trigger specific page functions
             if(pageId === 'work') setTimeout(updateDeck, 50);
             if(pageId === 'home') runStats();
             
-            // Fix Twitter Widget Reload
+            // FIX: Explicitly tell the Twitter widget to render any tweets when the Riot page is shown
             if (pageId === 'riot') {
+                // Small timeout to ensure DOM is ready and transition has started
                 setTimeout(() => {
                     if (typeof twttr !== 'undefined' && twttr.widgets) {
                         twttr.widgets.load(document.getElementById('riot-social-feed'));
                     }
-                }, 250);
+                }, 250); // Increased delay slightly
             }
         }
         
+        // Counter animation for the Home page stats section
         function runStats() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 let current = 0;
+                // Calculate increment to reach target in 100 steps
                 const increment = target / 100;
                 const updateCount = () => {
                     current += increment;
                     if(current < target) {
+                        // Use toFixed(1) for decimals like 1.1, else round for integers
                         counter.innerText = (target % 1 !== 0) ? current.toFixed(1) : Math.ceil(current);
                         requestAnimationFrame(updateCount);
                     } else {
@@ -1185,9 +1205,10 @@
             if(floatIndex > cards.length - 1) floatIndex = cards.length - 1;
             cards.forEach((card, index) => {
                 let diff = index - floatIndex;
-                if (Math.abs(diff) < 0.1) card.classList.add('active'); 
+                if (Math.abs(diff) < 0.1) card.classList.add('active'); // Center card is active
                 else card.classList.remove('active');
 
+                // 3D positioning logic
                 if (Math.abs(diff) < 0.1) {
                     card.style.transform = `translateX(0) scale(1) rotate(0deg)`;
                     card.style.zIndex = 100;
@@ -1203,8 +1224,7 @@
                     card.style.opacity = 1 - (absDiff * 0.2);
                 }
             });
-            
-            // Update colors
+            // Update page glow and text color to match the centered card
             let nearestIndex = Math.round(floatIndex);
             let color = '#9DE8FF'; 
             if (nearestIndex === 0) color = '#FF4655';
@@ -1222,6 +1242,7 @@
             }
         }
         
+        // Main function to update the card stack appearance and information box
         function updateDeck() {
             updateDeckVisuals(currentIndex);
             const infoHeader = document.getElementById('info-header');
@@ -1230,6 +1251,7 @@
                 infoHeader.textContent = projectData[currentIndex].title;
                 infoDesc.textContent = projectData[currentIndex].desc;
             }
+            // Update horizontal selector pill position and color
             const selectorItems = document.querySelectorAll('.selector-item');
             const selectorPill = document.querySelector('.selector-pill');
             if (selectorItems.length > 0 && selectorPill) {
@@ -1239,6 +1261,7 @@
                     activeItem.classList.add('active');
                     selectorPill.style.width = activeItem.offsetWidth + 'px';
                     selectorPill.style.left = activeItem.offsetLeft + 'px';
+                    // Match pill color to the card glow color
                     if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
                     else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
                     else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
@@ -1267,6 +1290,7 @@
         function startDrag(e) {
             if (!deckContainer) return;
             isDragging = true;
+            // Get X position from mouse or touch
             if (e.type === 'touchstart') {
                 startX = e.touches[0].pageX;
             } else {
@@ -1280,13 +1304,15 @@
             if (!isDragging) return;
             isDragging = false;
             if (deckContainer) deckContainer.style.cursor = 'grab';
+            
+            // Snap to nearest integer index
             const finalIndex = Math.round(currentIndex);
             snapToCard(finalIndex);
         }
 
         function moveDrag(e) {
             if (!isDragging) return;
-            e.preventDefault(); 
+            e.preventDefault(); // Prevent scrolling on touch
             let currentX;
             if (e.type === 'touchmove') {
                 currentX = e.touches[0].pageX;
@@ -1295,11 +1321,13 @@
             }
             
             const diff = startX - currentX;
+            // Sensitivity: 200px drag = 1 full card shift
             const shift = diff / 200; 
             let newVal = startVal + shift;
             
-            if (newVal < 0) newVal = newVal * 0.3; 
-            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; 
+            // Boundary checks with resistance
+            if (newVal < 0) newVal = newVal * 0.3; // Resistance at start
+            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; // Resistance at end
 
             currentIndex = newVal;
             updateDeckVisuals(currentIndex);
@@ -1308,54 +1336,29 @@
         function snapToCard(targetIndex) {
             if (targetIndex < 0) targetIndex = 0;
             if (targetIndex > cards.length - 1) targetIndex = cards.length - 1;
+            
             currentIndex = targetIndex;
-            updateDeck();
+            updateDeck(); // This snaps visual + updates text info
         }
 
-        // -- INITIALIZATION --
+        // Attach listeners
+        if (deckContainer) {
+            deckContainer.addEventListener('mousedown', startDrag);
+            deckContainer.addEventListener('touchstart', startDrag);
+            
+            deckContainer.addEventListener('mouseup', endDrag);
+            deckContainer.addEventListener('mouseleave', endDrag);
+            deckContainer.addEventListener('touchend', endDrag);
+            
+            deckContainer.addEventListener('mousemove', moveDrag);
+            deckContainer.addEventListener('touchmove', moveDrag);
+        }
+
+        
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => { 
-            // Assign DOM elements now that they exist
-            mainPlayer = document.getElementById('mainPlayer');
-            mainTitle = document.getElementById('mainTitle');
-            mainDesc = document.getElementById('mainDesc');
-            playlistContainer = document.getElementById('playlistSidebar');
-            deckContainer = document.getElementById('workDeckContainer');
-            cards = document.querySelectorAll('.work-card');
-            backToTopBtn = document.getElementById('backToTop');
-
             if(playlistContainer) renderPlaylist();
-            
-            if (deckContainer) {
-                deckContainer.addEventListener('mousedown', startDrag);
-                deckContainer.addEventListener('touchstart', startDrag);
-                
-                document.addEventListener('mouseup', endDrag);
-                deckContainer.addEventListener('mouseleave', endDrag);
-                document.addEventListener('touchend', endDrag);
-                
-                deckContainer.addEventListener('mousemove', moveDrag);
-                deckContainer.addEventListener('touchmove', moveDrag);
-            }
-            
-            // Scroll listener
-            window.addEventListener('scroll', () => {
-                if (backToTopBtn) {
-                    const activePage = document.querySelector('.page-view.active');
-                    const activeId = activePage ? activePage.id.replace('page-', '') : 'home';
-
-                    if (['riot', 'immortals', 'maryville', 'ottawa', 'work', 'video', 'influencers', 'events'].includes(activeId)) {
-                        if (window.scrollY > 300) {
-                            backToTopBtn.style.display = 'flex';
-                        } else {
-                            backToTopBtn.style.display = 'none';
-                        }
-                    } else {
-                        backToTopBtn.style.display = 'none';
-                    }
-                }
-            });
-
-            showPage('home'); 
+            showPage('home'); // Start on the Home page
         });
     </script>
 </body>
