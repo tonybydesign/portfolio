@@ -208,6 +208,9 @@
         }
         .stat-description { font-size: 1.1rem; color: #ccc; line-height: 1.6; }
 
+        /* ==========================
+           7. WORK PAGE & SLIDER
+           ========================== */
         .bio-section-centered {
             text-align: center; max-width: 800px; margin: 4rem auto 6rem auto; padding: 0 5%;
         }
@@ -215,9 +218,6 @@
         .bio-text { color: #cccccc; font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
         .link-highlight { color: var(--text-color); background: rgba(255,255,255,0.1); padding: 0 5px; border-radius: 4px; }
 
-        /* ==========================
-           7. WORK PAGE & SLIDER
-           ========================== */
         .page-header { padding: 8rem 5% 1rem 5%; text-align: center; }
         .page-title {
             font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
@@ -648,16 +648,13 @@
     </div>
     
     <div id="page-maryville" class="page-view">
-        <div class="project-hero">
-            <h1 class="project-title" style="color: #FF4655; text-shadow: 0 0 30px #FF4655;">Maryville University</h1>
-            <div class="project-meta"><span>COLLEGIATE ESPORTS</span> • <span>BRANDING</span> • <span>EVENT COVERAGE</span></div>
-            <div class="selector-nav-container" style="margin-top: 2rem;">
-                <div class="selector-nav">
-                    <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
-                    <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Maryville University</button>
-                    <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
-                </div>
+        <header class="page-header"><h1 class="page-title">Maryville University</h1><p class="page-subtitle">COLLEGIATE ESPORTS • BRANDING • EVENT COVERAGE</p></header>
+        <div class="selector-nav-container" style="margin-top: 2rem;">
+            <div class="selector-nav">
+                <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Maryville University</button>
+                <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
             </div>
         </div>
         <div class="project-grid">
@@ -681,18 +678,15 @@
         </div>
     </div>
      <div id="page-ottawa" class="page-view">
-         <div class="project-hero">
-            <h1 class="project-title" style="color: #FFC700; text-shadow: 0 0 30px #FFC700;">Ottawa University</h1>
-            <div class="project-meta"><span>COLLEGIATE DESIGN</span> • <span>VISUAL IDENTITY</span> • <span>BROADCAST ASSETS</span></div>
-            <div class="selector-nav-container" style="margin-top: 2rem;">
-                <div class="selector-nav">
-                    <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
-                    <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
-                    <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Ottawa University</button>
-                </div>
-            </div>
-        </div>
+         <header class="page-header"><h1 class="page-title">Ottawa University</h1><p class="page-subtitle">COLLEGIATE DESIGN • VISUAL IDENTITY • BROADCAST ASSETS</p></header>
+         <div class="selector-nav-container" style="margin-top: 2rem;">
+             <div class="selector-nav">
+                 <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                 <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                 <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                 <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Ottawa University</button>
+             </div>
+         </div>
         <!-- Strict 3x2 Grid for Ottawa -->
         <div class="project-grid ottawa-grid">
             <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Arena" alt="Arena"><div class="grid-caption">WELCOME TO ARENA</div></div>
