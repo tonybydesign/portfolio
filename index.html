@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- External Scripts -->
+    <!-- External Scripts (Twitter widget for social feed) -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
     <style>
@@ -33,6 +33,7 @@
             font-family: 'Space Grotesk', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
+            /* Sci-fi grid background pattern */
             background-image: 
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -62,6 +63,7 @@
             100% { opacity: 0.15; transform: scale(1); }
         }
 
+        /* Global ambient glow effect, changes color with page */
         body::after {
             content: '';
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -161,6 +163,7 @@
         .brands-section {
             padding: 2rem 0; text-align: center; position: relative;
             overflow: hidden; margin-bottom: 4rem;
+            /* Fades the logos near the edges */
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
@@ -172,7 +175,7 @@
             display: flex; width: max-content; 
             animation: scroll 40s linear infinite;
         }
-        /* No gap, use padding on items for seamless loop */
+        /* Marquee scroll animation logic */
         @keyframes scroll { 
             0% { transform: translateX(0); } 
             100% { transform: translateX(-33.333%); } 
@@ -255,33 +258,43 @@
             padding: 1rem 0; max-width: 100%; margin: 0 auto; 
             position: relative; height: 450px; display: flex; 
             align-items: center; justify-content: center; overflow: hidden;
+            /* Enable touch actions for swiping */
+            touch-action: pan-y; 
+            cursor: grab;
         }
+        .work-deck-container:active { cursor: grabbing; }
+
         .deck-arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.2);
             color: white; width: 40px; height: 40px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 100; transition: all 0.3s; font-size: 1rem;
+            cursor: pointer; z-index: 200; transition: all 0.3s; font-size: 1rem;
         }
         .deck-arrow:hover { background: var(--accent-color); border-color: var(--accent-color); color: black; }
+        /* Position arrows relative to the deck content area */
         .arrow-left { left: calc(50% - 320px); }
         .arrow-right { right: calc(50% - 320px); }
 
-        .work-deck { relative; width: 260px; height: 390px; perspective: 1000px; }
-
+        .work-deck { relative; width: 260px; height: 390px; perspective: 1000px; pointer-events: none; }
+        
+        /* Ensure cards capture clicks but don't block swipe logic on parent completely, 
+           handled via JS to distinguish click vs drag */
         .work-card {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(20, 20, 20, 0.9); backdrop-filter: blur(10px);
+            /* Custom diagonal clip-path for a unique shape */
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
             cursor: pointer; text-decoration: none;
             border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transform-origin: center bottom;
+            pointer-events: auto; /* Re-enable pointer events for clicks */
         }
         .work-card.no-transition { transition: none !important; }
 
-        /* Glow Colors */
+        /* Card-specific Glow Colors */
         .glow-teal { --card-glow: #26E6C7; border-color: rgba(38, 230, 199, 0.4); }
         .glow-red { --card-glow: #FF4655; border-color: rgba(255, 70, 85, 0.4); }
         .glow-yellow { --card-glow: #FFC700; border-color: rgba(255, 199, 0, 0.4); }
@@ -291,7 +304,10 @@
             background-size: cover; background-position: center;
             opacity: 0.4; transition: transform 0.6s, opacity 0.4s; z-index: 0; filter: grayscale(100%);
         }
-        .work-card.active { box-shadow: 0 0 40px var(--card-glow); border-color: var(--card-glow); z-index: 50; }
+        .work-card.active { 
+            box-shadow: 0 0 40px var(--card-glow); border-color: var(--card-glow); z-index: 50; 
+            border-width: 2px; /* Thicker border on active card */
+        }
         .work-card.active .card-bg { opacity: 0.7; filter: grayscale(0%); }
         
         .work-info-container { display: flex; justify-content: center; padding: 0 5% 2rem 5%; }
@@ -309,10 +325,11 @@
         /* ==========================
            8. PROJECT & GALLERY GRIDS
            ========================== */
+        /* Updated padding to 12rem top to match requests */
         .project-hero { padding: 12rem 5% 4rem 5%; text-align: center; }
         .project-title {
             font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; text-transform: uppercase; 
-            color: white; margin-bottom: 1rem; text-shadow: 0 0 30px var(--global-glow-color);
+            color: white; margin-bottom: 1rem; 
         }
         .project-meta {
             display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem;
@@ -334,7 +351,11 @@
             transform: translateY(-5px); border-color: var(--global-glow-color);
             box-shadow: 0 10px 30px -10px var(--global-glow-color);
         }
-        .grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+        .grid-item img { 
+            width: 100%; height: 100%; object-fit: cover; display: block; 
+            transition: transform 0.6s ease; 
+            min-height: 200px; /* Ensure images have minimum height */
+        }
         .grid-item:hover img { transform: scale(1.05); }
         
         .grid-caption {
@@ -393,8 +414,9 @@
             letter-spacing: 1px; border-bottom: 1px solid rgba(255, 70, 85, 0.3);
             padding-bottom: 1rem; margin-top: 2rem;
         }
-        .tweet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; }
+        .tweet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
         .tweet-container { display: flex; justify-content: center; width: 100%; }
+        /* Target Twitter widget */
         .twitter-tweet { width: 100% !important; margin: 0 !important; }
 
         /* Influencers */
@@ -472,7 +494,7 @@
         .social-icons a:hover { color: var(--accent-color); }
         .copyright { color: #444; font-size: 0.7rem; font-family: 'Space Grotesk', sans-serif; margin-top: auto; }
 
-        /* Media Queries */
+        /* Media Queries - Responsive Design */
         @media(max-width: 1050px) {
              nav { width: 95%; max-width: 90%; flex-direction: column; padding: 1rem; gap: 1rem; }
              .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
@@ -480,22 +502,26 @@
              .project-hero { padding-top: 200px; }
         }
         @media(max-width: 768px) {
+            .stats-split-grid { grid-template-columns: 1fr; }
+            .stat-card { border-left: none; border-bottom: 1px solid rgba(157, 232, 255, 0.1); padding-bottom: 3rem; }
             .col-span-2 { grid-column: span 1; }
             .project-grid, .ottawa-grid { grid-template-columns: 1fr !important; }
             .work-deck { width: 220px; height: 330px; }
+            /* Bring arrows closer on small screens */
             .arrow-left { left: 5px; } .arrow-right { right: 5px; }
-            .tweet-grid, .youtube-container, .video-split-section, .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .tweet-grid { grid-template-columns: 1fr; } /* Stack tweets on mobile */
+            .youtube-container, .video-split-section, .footer-content { grid-template-columns: 1fr; text-align: center; }
             .playlist-sidebar { height: auto; overflow-y: visible; }
             .footer-info-stack { align-items: center; text-align: center; padding-top: 0; }
             .nav-grid { text-align: left; justify-items: start; width: 100%; max-width: 300px; margin: 0 auto; }
             .footer-nav-header { text-align: center; }
             .about-container { flex-direction: column; text-align: center; align-items: center; }
-            .video-grid-2x2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Subtle dark edge effect -->
     <div class="vignette"></div>
 
     <!-- SHARED NAVIGATION -->
@@ -516,7 +542,7 @@
         </div>
     </nav>
 
-    <!-- PAGES -->
+    <!-- PAGES CONTAINER -->
     <div id="page-home" class="page-view active">
         <section class="hero">
             <h1>
@@ -527,7 +553,7 @@
         <section class="brands-section">
             <div class="section-title">Partners Worked With</div>
             <div class="marquee-track">
-                <!-- 3 SETS FOR SAFETY -->
+                <!-- 3 SETS for seamless looping -->
                 <div class="logo-item"><img src="https://logo.clearbit.com/progressive.com" alt="Progressive"></div>
                 <div class="logo-item"><img src="https://logo.clearbit.com/americanexpress.com" alt="Amex"></div>
                 <div class="logo-item"><img src="https://logo.clearbit.com/bitstamp.net" alt="Bitstamp"></div>
@@ -582,11 +608,11 @@
                 </div>
             </div>
         </header>
-        <div class="work-deck-container">
+        <div class="work-deck-container" id="workDeckContainer">
             <div class="deck-arrow arrow-left" onclick="moveDeck(-1)"><i class="fas fa-chevron-left"></i></div>
             <div class="deck-arrow arrow-right" onclick="moveDeck(1)"><i class="fas fa-chevron-right"></i></div>
             <div class="work-deck" id="cardDeck">
-                <!-- CARDS (Placeholders) -->
+                <!-- CARDS (Placeholders) - Data-index matches projectData array index -->
                 <div class="work-card glow-red" data-index="0" onclick="showPage('riot')">
                     <div class="card-bg" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('https://placehold.co/400x600/111/FF4655?text=Riot+Games');"></div>
                     <div class="card-content"></div>
@@ -613,80 +639,194 @@
         </div>
     </div>
 
-    <!-- Project Pages -->
+    <!-- Project Pages - Mock Content with Grid Layout -->
+    
+    <!-- RIOT GAMES PAGE -->
+    <div id="page-riot" class="page-view">
+        <div class="project-hero">
+            <h1 class="project-title" style="color:#FF4655; text-shadow:0 0 30px #FF4655;">Riot Games</h1>
+            <div class="project-meta"><span>ESPORTS EVENTS</span> • <span>BROADCAST GRAPHICS</span> • <span>CAMPAIGN DESIGN</span></div>
+            <!-- Secondary Navigation for Work Projects -->
+            <div class="selector-nav-container" style="margin-top: 2rem;">
+                <div class="selector-nav">
+                    <button class="selector-item active" style="color: #0a0a0a; background: #FF4655; border-radius: 40px; cursor: default;">Riot Games</button>
+                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                    <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                    <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FEATURED VIDEO (Valorant Masters Bangkok) -->
+        <div style="width: 100%; max-width: 1000px; margin: 0 auto 6rem auto; padding: 0 5%;">
+            <!-- UPDATED: Changed box-shadow and border to red (#FF4655) -->
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(255, 70, 85, 0.6); border: 1px solid rgba(255, 70, 85, 0.2);">
+                 <video controls playsinline autoplay muted loop style="width: 100%; display: block;" src="https://www.dropbox.com/scl/fi/y1jikyxvpl2ujms7h4mc2/Valorant-Masters-Bangkok.mp4?rlkey=kp1nglio28ztbaxsw1mzs6jra&st=r1muiqr6&raw=1"></video>
+            </div>
+        </div>
+
+        <!-- SOCIAL FEED SECTIONS -->
+        <div class="social-feed" id="riot-social-feed">
+            <!-- Community Engagement -->
+            <h3 class="feed-section-header">Community Engagement</h3>
+            <div class="tweet-grid">
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1886508919142355036">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1875270909399040169">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1885106337132036568">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Global Storylines -->
+            <h3 class="feed-section-header">Global Competitive Storylines</h3>
+            <div class="tweet-grid">
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879674224346071229">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882219415481225381">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1866888280249127081">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882634955681051053">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879336203692229076">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879275901940322557">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Live Game -->
+            <h3 class="feed-section-header">Live Game <span style="display:block; font-size: 0.6em; color: #888; margin-top: 5px; text-transform: none; letter-spacing: 0;">Cross-posted on all socials</span></h3>
+            <div class="tweet-grid">
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879999021626061091">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1880403230292865468">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882154423277035629">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="page-immortals" class="page-view">
         <div class="project-hero">
             <h1 class="project-title" style="color:#26E6C7; text-shadow:0 0 30px #26E6C7;">Immortals</h1>
             <div class="project-meta"><span>BRAND IDENTITY</span> • <span>VISUAL STRATEGY</span> • <span>SOCIAL MEDIA</span></div>
+            <!-- Secondary Navigation for Work Projects -->
             <div class="selector-nav-container" style="margin-top: 2rem;">
                 <div class="selector-nav">
                     <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
-                    <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Maryville University</button>
+                    <button class="selector-item active" style="color: #0a0a0a; background: #26E6C7; border-radius: 40px; cursor: default;">Immortals</button>
+                    <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
                     <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
                 </div>
             </div>
         </div>
         <div class="project-grid">
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Match+Day+Vert"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Solo"><div class="grid-caption">WELCOME SOLO</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Tactical+Match"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Promo+Wide"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-0"><div class="grid-caption">SCORE 1-0</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-1"><div class="grid-caption">SCORE 1-1</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-0"><div class="grid-caption">SCORE 2-0</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-1"><div class="grid-caption">SCORE 2-1</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=3+Days+Left"><div class="grid-caption">3 DAYS LEFT</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left"><div class="grid-caption">1 WEEK LEFT</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Revenge"><div class="grid-caption">REVENGE</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Kenvi"><div class="grid-caption">KENVI</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Ignar"><div class="grid-caption">IGNAR</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Lost"><div class="grid-caption">LOST</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Happy+Birthday"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=24H+Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
+            <div class="grid-item row-span-2"><img src="100T_Gameday.jpg" alt="Match Day Vert"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Solo" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Tactical+Match" alt="Tactical Match"><div class="grid-caption">TACTICAL MATCH DAY</div></div>
+            <div class="grid-item col-span-2"><img src="promo.jpg" alt="Promo Wide"><div class="grid-caption">YOUGELLY X TACTICAL</div></div>
+            <div class="grid-item row-span-2"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+1-1" alt="Score 1-1"><div class="grid-caption">SCORE 1-1</div></div>
+            <div class="grid-item row-span-2"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Score+2-1" alt="Score 2-1"><div class="grid-caption">SCORE 2-1</div></div>
+            <div class="grid-item col-span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left" alt="1 Week Left"><div class="grid-caption">1 WEEK LEFT</div></div>
+            <div class="grid-item row-span-2"><img src="revenge.jpg" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
+            <div class="grid-item row-span-2"><img src="kenvi.jpg" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
+            <div class="grid-item row-span-2"><img src="ignar.jpg" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
+            <div class="grid-item row-span-2"><img src="lost1.jpg" alt="Lost"><div class="grid-caption">LOST</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Happy+Birthday" alt="Happy Birthday"><div class="grid-caption">HAPPY BIRTHDAY TACTICAL</div></div>
+            <div class="grid-item row-span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
         </div>
     </div>
     
     <div id="page-maryville" class="page-view">
-        <header class="page-header"><h1 class="page-title">Maryville University</h1><p class="page-subtitle">COLLEGIATE ESPORTS • BRANDING • EVENT COVERAGE</p></header>
-        <div class="selector-nav-container" style="margin-top: 2rem;">
-            <div class="selector-nav">
-                <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
-                <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Maryville University</button>
-                <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
+        <!-- FIXED PADDING: Changed from page-header to project-hero -->
+        <div class="project-hero">
+            <h1 class="project-title" style="color:#FF4655; text-shadow:0 0 30px #FF4655;">Maryville University</h1>
+            <div class="project-meta"><span>COLLEGIATE ESPORTS</span> • <span>BRANDING</span> • <span>EVENT COVERAGE</span></div>
+            <div class="selector-nav-container" style="margin-top: 2rem;">
+                <div class="selector-nav">
+                    <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                    <button class="selector-item active" style="color: #0a0a0a; background: #FF4655; border-radius: 40px; cursor: default;">Maryville University</button>
+                    <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
+                </div>
             </div>
         </div>
         <div class="project-grid">
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Kings+of+North"><div class="grid-caption">KINGS OF THE NORTH</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Roster+Photo"><div class="grid-caption">ROSTER PHOTO</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Nat+Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=10K+Milestone"><div class="grid-caption">10K MILESTONE</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zach+Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zyko"><div class="grid-caption">ZYKO</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACL+Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left"><div class="grid-caption">1 WEEK LEFT</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Trophy+Lift"><div class="grid-caption">TROPHY LIFT</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=The+Gym"><div class="grid-caption">THE GYM SHOWMATCH</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Welcome+Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACE+Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Squid"><div class="grid-caption">WELCOME SQUID</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Top+4"><div class="grid-caption">TOP 4 CLOL</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Thank+You"><div class="grid-caption">THANK YOU LETTER</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Vision"><div class="grid-caption">WELCOME VISION</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Kings+of+North" alt="Kings of North"><div class="grid-caption">KINGS OF THE NORTH</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Roster+Photo" alt="Roster Photo"><div class="grid-caption">ROSTER PHOTO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Nat+Champs" alt="Nat Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=10K+Milestone" alt="10K Milestone"><div class="grid-caption">10K MILESTONE</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zach+Hughes" alt="Zach Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zyko" alt="Zyko"><div class="grid-caption">ZYKO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACL+Schedule" alt="NACL Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=1+Week+Left" alt="1 Week Left"><div class="grid-caption">1 WEEK LEFT</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Trophy+Lift" alt="Trophy Lift"><div class="grid-caption">TROPHY LIFT</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=The+Gym" alt="The Gym"><div class="grid-caption">THE GYM SHOWMATCH</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Welcome+Saints" alt="Welcome Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=NACE+Finals" alt="NACE Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Squid" alt="Welcome Squid"><div class="grid-caption">WELCOME SQUID</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Zamudo" alt="Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Top+4" alt="Top 4"><div class="grid-caption">TOP 4 CLOL</div></div>
+            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Thank+You" alt="Thank You"><div class="grid-caption">THANK YOU LETTER</div></div>
+            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Welcome+Vision" alt="Welcome Vision"><div class="grid-caption">WELCOME VISION</div></div>
         </div>
     </div>
+    
      <div id="page-ottawa" class="page-view">
-         <header class="page-header"><h1 class="page-title">Ottawa University</h1><p class="page-subtitle">COLLEGIATE DESIGN • VISUAL IDENTITY • BROADCAST ASSETS</p></header>
-         <div class="selector-nav-container" style="margin-top: 2rem;">
-             <div class="selector-nav">
-                 <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
-                 <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
-                 <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
-                 <button class="selector-item active" style="color: #0a0a0a; background: #ffffff; border-radius: 40px; cursor: default;">Ottawa University</button>
+         <!-- FIXED PADDING: Changed from page-header to project-hero -->
+         <div class="project-hero">
+            <h1 class="project-title" style="color:#FFC700; text-shadow:0 0 30px #FFC700;">Ottawa University</h1>
+            <div class="project-meta"><span>COLLEGIATE DESIGN</span> • <span>VISUAL IDENTITY</span> • <span>BROADCAST ASSETS</span></div>
+             <div class="selector-nav-container" style="margin-top: 2rem;">
+                 <div class="selector-nav">
+                     <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                     <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                     <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                     <button class="selector-item active" style="color: #0a0a0a; background: #FFC700; border-radius: 40px; cursor: default;">Ottawa University</button>
+                 </div>
              </div>
-         </div>
+        </div>
         <!-- Strict 3x2 Grid for Ottawa -->
         <div class="project-grid ottawa-grid">
             <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Arena" alt="Arena"><div class="grid-caption">WELCOME TO ARENA</div></div>
@@ -704,6 +844,7 @@
             <div class="main-video-area">
                 <div class="main-video-player">
                     <!-- MAIN FEATURE: CHARADES (MP4) -->
+                    <!-- Note: Real video links from a public hosting service (Dropbox raw link used here for demonstration) -->
                     <video id="mainPlayer" controls playsinline src="https://www.dropbox.com/scl/fi/erdm25qowckyid9nx65wr/CHARADES-V7.mp4?rlkey=qlhs5pih5bx0s256e0bxm9kf5&st=ce14pt06&raw=1"></video>
                 </div>
                 <div class="video-meta">
@@ -759,21 +900,19 @@
         </div>
     </div>
 
-    <div id="page-events" class="page-view">
-        <header class="page-header"><h1 class="page-title">Events</h1><p class="page-subtitle">Experiential design and coverage.</p></header>
-        <div class="project-grid">
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Popsicle+Cart"><div class="grid-caption">POPSICLE CART SETUP</div></div>
-            <div class="grid-item row-span-2"><img src="https://placehold.co/400x800/222/FFF?text=Bus+Wrap"><div class="grid-caption">BUS WRAP DESIGN</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Step+Repeat"><div class="grid-caption">STEP AND REPEAT</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=Group+Pic"><div class="grid-caption">COMMUNITY BRUNCH</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Drink+Menu"><div class="grid-caption">CUSTOM DRINK MENU</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Cup+Design"><div class="grid-caption">BRANDED CUP DESIGN</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Custom+Pops"><div class="grid-caption">CUSTOM POPSICLES</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+1"><div class="grid-caption">SOCIAL PROMOTION</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+2"><div class="grid-caption">EVENT ITINERARY</div></div>
-            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+3"><div class="grid-caption">MEET AND GREET</div></div>
-            <div class="grid-item col-span-2"><img src="https://placehold.co/800x400/222/FFF?text=TFT+Community"><div class="grid-caption">TFT COMMUNITY EVENT</div></div>
-        </div>
+    <div id="page-about" class="page-view">
+        <header class="page-header"><h1 class="page-title">About</h1><p class="page-subtitle">The designer behind the screen.</p></header>
+        <section class="bio-section-centered">
+            <div class="bio-title">Antonio Bautista-Foti</div>
+            <p class="bio-text" style="text-align: left;">
+                I'm Antonio, a visual designer and creative strategist based in St. Louis, MO, specializing in high-impact digital content and brand identity for the gaming and esports industry. 
+                <br><br>
+                For the last six years, I've had the privilege of working with global brands like Immortals, Riot Games, and numerous collegiate programs, building visual narratives that resonate with passionate communities. My work blends strategic thinking with bold, dynamic execution—whether it's building an entire visual system from scratch or designing a single, viral social graphic. I believe good design isn't just about aesthetics; it's about solving problems and driving tangible results.
+                <br><br>
+                Let's build something unforgettable.
+            </p>
+            <button class="nav-btn cta-button" style="margin-top: 2rem;">Get in Touch (Email)</button>
+        </section>
     </div>
 
     <!-- FOOTER -->
@@ -809,7 +948,7 @@
     </footer>
 
     <script>
-        // DROPBOX LINKS INTEGRATED & CONVERTED TO RAW
+        // Data for the Video Page Playlist
         const videoList = [
             { 
               src: "https://www.dropbox.com/scl/fi/n13fdjjoy7ijxpwn4ogd8/chat.mp4?rlkey=c4nosq0mb2ajidzwzgtcx39n8&st=dv0e58jd&raw=1", 
@@ -833,36 +972,59 @@
             }
         ];
         
-        // Videos in the main HTML section
+        // DOM elements for Video Page
         const mainPlayer = document.getElementById('mainPlayer');
         const mainTitle = document.getElementById('mainTitle');
         const mainDesc = document.getElementById('mainDesc');
         const playlistContainer = document.getElementById('playlistSidebar');
         
-        // Function definitions (must be outside of DOMContentLoaded)
+        // Populates the playlist sidebar
+        // FIXED: Replaced inline onmouseover/onmouseout with safer event listeners to prevent AbortError
         function renderPlaylist() {
             playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
             videoList.forEach((vid, index) => {
                 const item = document.createElement('div');
                 item.className = 'video-thumbnail';
                 item.onclick = () => swapVideo(index);
+                
+                // Construct inner HTML without inline events for play/pause
                 item.innerHTML = `
                     <div class="thumb-img-wrapper">
                         <video 
                             src="${vid.src}" 
                             muted 
                             loop 
-                            onmouseover="this.play()" 
-                            onmouseout="this.pause();this.currentTime=0;"
+                            playsinline
+                            onloadedmetadata="this.currentTime=2"
                             onerror="this.parentNode.innerHTML='<img src=&quot;https://placehold.co/160x90/555/FFF?text=Broken&quot; style=&quot;width:100%; height:100%; object-fit:cover;&quot;>'">
                         </video>
                     </div>
                     <div class="thumb-info"><div class="thumb-title">${vid.title}</div></div>
                 `;
+                
+                // Attach safe event listeners
+                const video = item.querySelector('video');
+                if(video) {
+                    item.addEventListener('mouseenter', () => {
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                // Auto-play was prevented or interrupted, likely by fast mouse movement
+                                // We can ignore this specific error
+                            });
+                        }
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 2; // Reset preview
+                    });
+                }
+
                 playlistContainer.appendChild(item);
             });
         }
 
+        // Swaps the main video with a selected playlist video
         function swapVideo(index) {
             const oldMain = { 
                 src: mainPlayer.getAttribute('src'), 
@@ -878,19 +1040,21 @@
             mainTitle.textContent = selected.title; 
             mainDesc.textContent = selected.desc;
             
-            // Re-add the previous main video back to the end of the playlist
+            // Re-add the previous main video back to the end of the playlist array
             if(oldMain.src) {
                 videoList.splice(index, 1); 
                 videoList.push(oldMain);
             }
-            renderPlaylist();
+            renderPlaylist(); // Rerender the updated playlist
         }
 
+        // Handles page view switching and nav bar active state
         function showPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
             let btnToActive = document.getElementById('btn-' + pageId);
+            // Handle sub-pages: activate the 'Work' button for project pages
             if(['immortals', 'maryville', 'riot', 'ottawa'].includes(pageId)) {
                 btnToActive = document.getElementById('btn-work');
             } 
@@ -905,26 +1069,43 @@
                 window.scrollTo(0, 0);
             }
             
-            // Glow Logic
+            // Glow Color Logic (Changes the ambient glow based on the active page/project)
             const root = document.documentElement;
-            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF');
-            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); 
-            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
-            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
+            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); // Default Blue
+            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); // Teal
+            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); // Red
+            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); // Yellow
+            else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
+            else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#FF4655');
+
             
+            // Trigger specific page functions
             if(pageId === 'work') setTimeout(updateDeck, 50);
             if(pageId === 'home') runStats();
+            
+            // FIX: Explicitly tell the Twitter widget to render any tweets when the Riot page is shown
+            if (pageId === 'riot') {
+                // Small timeout to ensure DOM is ready and transition has started
+                setTimeout(() => {
+                    if (typeof twttr !== 'undefined' && twttr.widgets) {
+                        twttr.widgets.load(document.getElementById('riot-social-feed'));
+                    }
+                }, 100);
+            }
         }
         
+        // Counter animation for the Home page stats section
         function runStats() {
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
                 let current = 0;
+                // Calculate increment to reach target in 100 steps
                 const increment = target / 100;
                 const updateCount = () => {
                     current += increment;
                     if(current < target) {
+                        // Use toFixed(1) for decimals like 1.1, else round for integers
                         counter.innerText = (target % 1 !== 0) ? current.toFixed(1) : Math.ceil(current);
                         requestAnimationFrame(updateCount);
                     } else {
@@ -935,7 +1116,7 @@
             });
         }
         
-        // 2. Deck & Slider Logic (Functions omitted for brevity, but exist in the working code)
+        // Deck & Slider Logic for the 'Work' page
         let currentIndex = 0;
         const cards = document.querySelectorAll('.work-card');
         const projectData = [
@@ -956,6 +1137,7 @@
             updateDeck();
         }
 
+        // Main function to update the card stack appearance and information box
         function updateDeck() {
             updateDeckVisuals(currentIndex);
             const infoHeader = document.getElementById('info-header');
@@ -964,6 +1146,7 @@
                 infoHeader.textContent = projectData[currentIndex].title;
                 infoDesc.textContent = projectData[currentIndex].desc;
             }
+            // Update horizontal selector pill position and color
             const selectorItems = document.querySelectorAll('.selector-item');
             const selectorPill = document.querySelector('.selector-pill');
             if (selectorItems.length > 0 && selectorPill) {
@@ -973,6 +1156,7 @@
                     activeItem.classList.add('active');
                     selectorPill.style.width = activeItem.offsetWidth + 'px';
                     selectorPill.style.left = activeItem.offsetLeft + 'px';
+                    // Match pill color to the card glow color
                     if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
                     else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
                     else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
@@ -981,13 +1165,16 @@
             }
         }
 
+        // Applies 3D transform (translate, scale, rotate) to simulate a stack/deck
         function updateDeckVisuals(floatIndex) {
             if(floatIndex < 0) floatIndex = 0;
             if(floatIndex > cards.length - 1) floatIndex = cards.length - 1;
             cards.forEach((card, index) => {
                 let diff = index - floatIndex;
-                if (Math.abs(diff) < 0.5) card.classList.add('active');
+                if (Math.abs(diff) < 0.1) card.classList.add('active'); // Center card is active
                 else card.classList.remove('active');
+
+                // 3D positioning logic
                 if (Math.abs(diff) < 0.1) {
                     card.style.transform = `translateX(0) scale(1) rotate(0deg)`;
                     card.style.zIndex = 100;
@@ -1003,33 +1190,15 @@
                     card.style.opacity = 1 - (absDiff * 0.2);
                 }
             });
+            // Update page glow and text color to match the centered card
             let nearestIndex = Math.round(floatIndex);
-            const selectorPill = document.querySelector('.selector-pill');
-            if (selectorPill) {
-                 if (nearestIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
-                 else if (nearestIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
-                 else if (nearestIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
-                 else if (nearestIndex === 3) selectorPill.style.backgroundColor = '#FFC700';
-            }
-            const selectorItems = document.querySelectorAll('.selector-item');
-            const titleSpan = document.querySelector('.page-title .elegant-serif');
-            selectorItems.forEach((item, index) => {
-                let dist = Math.abs(index - floatIndex);
-                if (dist < 0.6) {
-                    item.classList.add('active');
-                    item.style.color = 'white';
-                    item.style.textShadow = '0 1px 2px rgba(0,0,0,0.5)';
-                } else {
-                    item.classList.remove('active');
-                    item.style.color = '#888';
-                    item.style.textShadow = 'none';
-                }
-            });
             let color = '#9DE8FF'; 
             if (nearestIndex === 0) color = '#FF4655';
             else if (nearestIndex === 1) color = '#26E6C7';
             else if (nearestIndex === 2) color = '#FF4655';
             else if (nearestIndex === 3) color = '#FFC700';
+
+            const titleSpan = document.querySelector('.page-title .elegant-serif');
             if(titleSpan) {
                 titleSpan.style.color = color;
                 titleSpan.style.textShadow = `0 0 15px ${color}`;
@@ -1039,10 +1208,90 @@
             }
         }
         
+        // DRAG AND SWIPE LOGIC
+        const deckContainer = document.getElementById('workDeckContainer');
+        let isDragging = false;
+        let startX = 0;
+        let startDist = 0;
+        let currentTranslate = 0;
+        let animationID;
+        let startVal = 0;
+
+        function startDrag(e) {
+            // Check if clicking a link or something interactive inside card if needed
+            // But generally start dragging
+            isDragging = true;
+            // Get X position from mouse or touch
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].pageX;
+            } else {
+                startX = e.pageX;
+            }
+            startVal = currentIndex;
+            // Stop any snapping animations if we were animating
+            cancelAnimationFrame(animationID);
+            deckContainer.style.cursor = 'grabbing';
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            deckContainer.style.cursor = 'grab';
+            
+            // Snap to nearest integer index
+            const finalIndex = Math.round(currentIndex);
+            snapToCard(finalIndex);
+        }
+
+        function moveDrag(e) {
+            if (!isDragging) return;
+            e.preventDefault(); // Prevent scrolling on touch
+            let currentX;
+            if (e.type === 'touchmove') {
+                currentX = e.touches[0].pageX;
+            } else {
+                currentX = e.pageX;
+            }
+            
+            const diff = startX - currentX;
+            // Sensitivity: 200px drag = 1 full card shift
+            const shift = diff / 200; 
+            let newVal = startVal + shift;
+            
+            // Boundary checks with resistance
+            if (newVal < 0) newVal = newVal * 0.3; // Resistance at start
+            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; // Resistance at end
+
+            currentIndex = newVal;
+            updateDeckVisuals(currentIndex);
+        }
+
+        function snapToCard(targetIndex) {
+            if (targetIndex < 0) targetIndex = 0;
+            if (targetIndex > cards.length - 1) targetIndex = cards.length - 1;
+            
+            currentIndex = targetIndex;
+            updateDeck(); // This snaps visual + updates text info
+        }
+
+        // Attach listeners
+        if (deckContainer) {
+            deckContainer.addEventListener('mousedown', startDrag);
+            deckContainer.addEventListener('touchstart', startDrag);
+            
+            deckContainer.addEventListener('mouseup', endDrag);
+            deckContainer.addEventListener('mouseleave', endDrag);
+            deckContainer.addEventListener('touchend', endDrag);
+            
+            deckContainer.addEventListener('mousemove', moveDrag);
+            deckContainer.addEventListener('touchmove', moveDrag);
+        }
+
+        
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => { 
             if(playlistContainer) renderPlaylist();
-            showPage('home'); 
+            showPage('home'); // Start on the Home page
         });
     </script>
 </body>
