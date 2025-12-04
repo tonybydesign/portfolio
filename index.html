@@ -165,18 +165,15 @@
         /* ==========================
            5. COMPONENT: CAROUSEL
            ========================== */
-        /* UPDATED: Carousel container for 3-logo focus */
         .brands-section {
             padding: 2rem 0; 
             text-align: center; 
             position: relative;
             overflow: hidden; 
             margin-bottom: 4rem;
-            /* Narrower width to force focus on fewer items */
             max-width: 900px; 
             margin-left: auto; 
             margin-right: auto;
-            /* Stronger gradient mask for "fading out on each side" */
             mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
         }
@@ -194,7 +191,6 @@
         }
         
         .logo-item {
-            /* Increased spacing for "only 3 logos at a time" visual */
             padding: 0 60px; 
             display: flex; align-items: center;
         }
@@ -234,16 +230,6 @@
         .bio-text { color: #cccccc; font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
         .link-highlight { color: var(--text-color); background: rgba(255,255,255,0.1); padding: 0 5px; border-radius: 4px; }
         
-        /* About Profile Pic */
-        .about-pfp {
-            width: 200px; height: 200px; 
-            object-fit: cover; 
-            border-radius: 30px; /* Rounded Square */
-            margin-bottom: 2rem;
-            border: 2px solid rgba(255,255,255,0.1);
-            background-color: #111;
-        }
-
         .page-header { padding: 8rem 5% 1rem 5%; text-align: center; }
         .page-title {
             font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
@@ -404,12 +390,12 @@
             text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;
         }
         
-        /* NEW UTILITY: Crop Bus Wrap to 16:9 with centered windows */
-        .crop-bus-wrap {
+        /* Updated Utility for Events Page Uniformity */
+        .activations-img {
             width: 100%;
             aspect-ratio: 16 / 9;
             object-fit: cover;
-            object-position: center; /* Ensures windows/middle is focus */
+            object-position: center; 
         }
         
         /* Span utilities */
@@ -445,6 +431,7 @@
         .youtube-container {
             display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;
             max-width: 1400px; margin: 0 auto 6rem auto; padding: 0 5%;
+            align-items: flex-start; /* Ensure items align to top so sidebar doesn't stretch empty space */
         }
         .main-video-player {
             width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden;
@@ -456,7 +443,12 @@
         .video-title { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem; text-transform: uppercase; }
         .video-desc { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #888; line-height: 1.5; }
 
-        .playlist-sidebar { display: flex; flex-direction: column; gap: 1rem; height: 100%; overflow-y: auto; }
+        /* Updated Sidebar to prevent overflow below main content area */
+        .playlist-sidebar { 
+            display: flex; flex-direction: column; gap: 1rem; 
+            max-height: 600px; /* Restrict height */
+            overflow-y: auto; /* Enable scroll inside sidebar */
+        }
         .playlist-header { font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; }
         
         .video-thumbnail { display: flex; gap: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.2s; }
@@ -530,6 +522,117 @@
         .stat-row { display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #cccccc; }
         .stat-row i { font-size: 1.6rem; color: white; width: auto; transition: color 0.3s; }
         .stat-row:hover i { color: var(--accent-color); }
+
+        /* ABOUT PAGE HORIZONTAL LAYOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 5%;
+            align-items: center;
+        }
+        
+        .about-left {
+            text-align: center;
+        }
+        
+        .about-pfp-large {
+            width: 280px; height: 280px;
+            object-fit: cover;
+            border-radius: 30px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: #111;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-right {
+            text-align: left;
+        }
+        
+        .about-main-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .about-subtitle {
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* CONTACT FORM STYLES */
+        .contact-container {
+            max-width: 600px;
+            margin: 4rem auto 8rem auto;
+            padding: 2rem;
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .contact-form-group {
+            margin-bottom: 1.5rem;
+        }
+        .contact-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+        }
+        .contact-input, .contact-textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .contact-input:focus, .contact-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .contact-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Media Queries for new layouts */
+        @media(max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-right { text-align: center; }
+        }
 
         /* ==========================
            9. FOOTER
@@ -676,7 +779,7 @@
             <button onclick="showPage('influencers')" class="nav-btn" id="btn-influencers">Influencers</button>
             <button onclick="showPage('events')" class="nav-btn" id="btn-events">Events</button>
             <button onclick="showPage('about')" class="nav-btn" id="btn-about">About</button>
-            <button class="nav-btn cta-button">Contact</button>
+            <button onclick="showPage('contact')" class="nav-btn cta-button">Contact</button>
         </div>
     </nav>
 
@@ -1083,10 +1186,10 @@
         <!-- Physical Activations - MOVED TO TOP -->
         <h3 class="section-title" style="text-align:center; margin-bottom: 2rem;">On-Site Activations</h3>
         <div class="project-grid grid-3-cols" style="margin-bottom: 4rem;">
-            <!-- UPDATED: Added crop-bus-wrap class -->
-            <div class="grid-item"><img src="buswrap.webp" alt="Bus Wrap" class="crop-bus-wrap"><div class="grid-caption">CUSTOM BUS WRAP</div></div>
-            <div class="grid-item"><img src="PopUpBannerandPopsicleCart.webp" alt="Popsicle Cart"><div class="grid-caption">BRANDED POP-UP CART</div></div>
-            <div class="grid-item"><img src="CustomPopsicles.webp" alt="Custom Popsicles"><div class="grid-caption">CUSTOM MOLDED POPSICLES</div></div>
+            <!-- UPDATED: All using 'activations-img' class for 16:9 uniformity -->
+            <div class="grid-item"><img src="buswrap.webp" alt="Bus Wrap" class="activations-img"><div class="grid-caption">CUSTOM BUS WRAP</div></div>
+            <div class="grid-item"><img src="PopUpBannerandPopsicleCart.webp" alt="Popsicle Cart" class="activations-img"><div class="grid-caption">BRANDED POP-UP CART</div></div>
+            <div class="grid-item"><img src="CustomPopsicles.webp" alt="Custom Popsicles" class="activations-img"><div class="grid-caption">CUSTOM MOLDED POPSICLES</div></div>
         </div>
 
         <!-- Experience Details -->
@@ -1106,22 +1209,52 @@
         </div>
     </div>
 
+    <!-- UPDATED: About Section Horizontal Layout -->
     <div id="page-about" class="page-view">
-        <header class="page-header"><h1 class="page-title">About</h1><p class="page-subtitle">The designer behind the screen.</p></header>
-        <section class="bio-section-centered">
-            <!-- UPDATED: Profile Picture -->
-            <img src="pfp4.png" alt="Antonio Bautista-Foti" class="about-pfp">
-            
-            <div class="bio-title">Antonio Bautista-Foti</div>
-            <p class="bio-text" style="text-align: left;">
-                I'm Antonio, a visual designer and creative strategist based in St. Louis, MO, specializing in high-impact digital content and brand identity for the gaming and esports industry. 
-                <br><br>
-                For the last six years, I've had the privilege of working with global brands like Immortals, Riot Games, and numerous collegiate programs, building visual narratives that resonate with passionate communities. My work blends strategic thinking with bold, dynamic execution—whether it's building an entire visual system from scratch or designing a single, viral social graphic. I believe good design isn't just about aesthetics; it's about solving problems and driving tangible results.
-                <br><br>
-                Let's build something unforgettable.
-            </p>
-            <button class="nav-btn cta-button" style="margin-top: 2rem;">Get in Touch (Email)</button>
-        </section>
+        <div class="about-grid">
+            <div class="about-left">
+                <img src="pfp4.png" alt="Antonio Bautista-Foti" class="about-pfp-large">
+                <h3 style="font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700;">Antonio Bautista-Foti</h3>
+            </div>
+            <div class="about-right">
+                <h1 class="about-main-title">About</h1>
+                <p class="about-subtitle">The designer behind the screen.</p>
+                <p class="bio-text" style="text-align: left; margin-bottom: 2rem;">
+                    I'm Antonio, a visual designer and creative strategist based in St. Louis, MO, specializing in high-impact digital content and brand identity for the gaming and esports industry. 
+                    <br><br>
+                    For the last six years, I've had the privilege of working with global brands like Immortals, Riot Games, and numerous collegiate programs, building visual narratives that resonate with passionate communities. My work blends strategic thinking with bold, dynamic execution—whether it's building an entire visual system from scratch or designing a single, viral social graphic. I believe good design isn't just about aesthetics; it's about solving problems and driving tangible results.
+                    <br><br>
+                    Let's build something unforgettable.
+                </p>
+                <!-- Button now links to contact page -->
+                <button class="nav-btn cta-button" onclick="window.showPage('contact')">Get in Touch</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW PAGE: CONTACT -->
+    <div id="page-contact" class="page-view">
+        <header class="page-header">
+            <h1 class="page-title">Contact</h1>
+            <p class="page-subtitle">Let's start a conversation.</p>
+        </header>
+        <div class="contact-container">
+            <form action="mailto:bautistafoti.antonio@gmail.com" method="post" enctype="text/plain">
+                <div class="contact-form-group">
+                    <label class="contact-label">Name</label>
+                    <input type="text" name="name" class="contact-input" required>
+                </div>
+                <div class="contact-form-group">
+                    <label class="contact-label">Email</label>
+                    <input type="email" name="email" class="contact-input" required>
+                </div>
+                <div class="contact-form-group">
+                    <label class="contact-label">Description (Max 500 chars)</label>
+                    <textarea name="description" class="contact-textarea" maxlength="500" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
     </div>
 
     <!-- FOOTER (Updated Layout based on image_4b22a0.png) -->
@@ -1134,7 +1267,7 @@
                         <button onclick="showPage('home')" class="footer-link">Home</button>
                         <button onclick="showPage('about')" class="footer-link">About</button>
                         <button onclick="showPage('work')" class="footer-link">Work</button>
-                        <button class="footer-link">Contact</button>
+                        <button onclick="showPage('contact')" class="footer-link">Contact</button>
                     </div>
                     <div class="footer-col">
                         <button onclick="showPage('riot')" class="footer-sublink">Riot Games</button>
