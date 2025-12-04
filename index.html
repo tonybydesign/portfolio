@@ -338,7 +338,7 @@
 
         .project-grid {
             display: grid; 
-            /* Default column size, auto fit for responsiveness */
+            /* Default behavior: auto fit, but we override this with specific classes */
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             grid-auto-flow: dense; 
             /* FIXED: Set rows to auto to allow content (image aspect ratio) to dictate height */
@@ -348,8 +348,12 @@
             max-width: 1400px; 
             margin: 0 auto;
         }
-        .ottawa-grid { grid-template-columns: repeat(3, 1fr) !important; grid-auto-rows: auto; }
         
+        /* Explicit Column Layouts for different projects */
+        .grid-4-cols { grid-template-columns: repeat(4, 1fr); }
+        .grid-3-cols { grid-template-columns: repeat(3, 1fr); }
+        .grid-2-cols { grid-template-columns: repeat(2, 1fr); }
+
         .grid-item {
             position: relative; 
             border-radius: 8px; 
@@ -386,8 +390,8 @@
             text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;
         }
         
-        .col-span-2 { grid-column: span 2; }
-        .row-span-2 { grid-row: span 2; }
+        /* Span utilities for explicit grids */
+        .span-2 { grid-column: span 2; }
 
         /* BACK TO TOP BUTTON */
         .back-to-top {
@@ -531,22 +535,18 @@
         }
         .work-sub-list button:hover { color: white; }
 
-        .footer-info-stack {
-            display: flex; flex-direction: column; align-items: flex-end; text-align: right;
-            gap: 1.5rem; padding-top: 3rem;
-        }
-        .location-text { color: #888; font-size: 0.9rem; font-family: 'Space Grotesk', sans-serif; }
-        .social-icons { display: flex; gap: 1.2rem; }
-        .social-icons a { color: white; font-size: 1.2rem; transition: color 0.3s; }
-        .social-icons a:hover { color: var(--accent-color); }
-        .copyright { color: #444; font-size: 0.7rem; font-family: 'Space Grotesk', sans-serif; margin-top: auto; }
-
         /* Media Queries - Responsive Design */
         @media(max-width: 1050px) {
              nav { width: 95%; max-width: 90%; flex-direction: column; padding: 1rem; gap: 1rem; }
              .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; }
              .hero { padding-top: 220px; }
              .project-hero { padding-top: 200px; }
+             
+             /* Reset explicit grids on smaller screens to auto-fit */
+             .grid-4-cols, .grid-3-cols, .grid-2-cols { 
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; 
+             }
+             .span-2 { grid-column: auto !important; }
         }
         @media(max-width: 768px) {
             .stats-split-grid { grid-template-columns: 1fr; }
@@ -765,3 +765,598 @@
                 <div class="tweet-container">
                     <blockquote class="twitter-tweet" data-theme="dark">
                         <a href="https://twitter.com/ValorantEsports/status/1879336203692229076">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879275901940322557">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Live Game -->
+            <h3 class="feed-section-header">Live Game <span style="display:block; font-size: 0.6em; color: #888; margin-top: 5px; text-transform: none; letter-spacing: 0;">Cross-posted on all socials</span></h3>
+            <div class="tweet-grid">
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1879999021626061091">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1880403230292865468">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+                <div class="tweet-container">
+                    <blockquote class="twitter-tweet" data-theme="dark">
+                        <a href="https://twitter.com/ValorantEsports/status/1882154423277035629">View Tweet on Twitter</a>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-immortals" class="page-view">
+        <div class="project-hero">
+            <h1 class="project-title" style="color:#26E6C7; text-shadow:0 0 30px #26E6C7;">Immortals</h1>
+            <div class="project-meta"><span>BRAND IDENTITY</span> • <span>VISUAL STRATEGY</span> • <span>SOCIAL MEDIA</span></div>
+            <!-- Secondary Navigation for Work Projects -->
+            <div class="selector-nav-container" style="margin-top: 2rem;">
+                <div class="selector-nav">
+                    <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                    <button class="selector-item active" style="color: #0a0a0a; background: #26E6C7; border-radius: 40px; cursor: default;">Immortals</button>
+                    <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                    <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
+                </div>
+            </div>
+        </div>
+        <!-- GRID-4-COLS forced for Immortals layout -->
+        <div class="project-grid grid-4-cols">
+            <!-- ROW 1: 4 Portraits -->
+            <div class="grid-item"><img src="ignar.jpg" alt="Ignar"><div class="grid-caption">IGNAR</div></div>
+            <div class="grid-item"><img src="lost1.jpg" alt="Lost"><div class="grid-caption">LOST</div></div>
+            <div class="grid-item"><img src="kenvi.jpg" alt="Kenvi"><div class="grid-caption">KENVI</div></div>
+            <div class="grid-item"><img src="revenge.jpg" alt="Revenge"><div class="grid-caption">REVENGE</div></div>
+            
+            <!-- ROW 2: 2 Landscapes (span 2 each) -->
+            <div class="grid-item span-2"><img src="welcomesolo.jpg" alt="Welcome Solo"><div class="grid-caption">WELCOME SOLO</div></div>
+            <div class="grid-item span-2"><img src="v1.jpg" alt="Teamfight Tactics"><div class="grid-caption">TEAMFIGHT TACTICS</div></div>
+            
+            <!-- ROW 3: 2 Landscapes (span 2 each) -->
+            <div class="grid-item span-2"><img src="3DAYS.jpg" alt="3 Days Left"><div class="grid-caption">3 DAYS LEFT</div></div>
+            <div class="grid-item span-2"><img src="24h.jpg" alt="24H Winner"><div class="grid-caption">24 HOUR WINNER</div></div>
+
+            <!-- ROW 4: 3 Portraits (grid flow will naturally wrap or leave gap, but let's just list them) -->
+            <div class="grid-item"><img src="100T_20.jpg" alt="Score 2-0"><div class="grid-caption">SCORE 2-0</div></div>
+            <div class="grid-item"><img src="100T_10.jpg" alt="Score 1-0"><div class="grid-caption">SCORE 1-0</div></div>
+            <div class="grid-item"><img src="100T_Gameday.jpg" alt="Match Day"><div class="grid-caption">MATCH DAY GRAPHIC</div></div>
+            <!-- Note: In a 4-col grid, 3 items will leave one empty space at end, which is fine/expected -->
+        </div>
+    </div>
+    
+    <div id="page-maryville" class="page-view">
+        <!-- FIXED PADDING: Changed from page-header to project-hero -->
+        <div class="project-hero">
+            <h1 class="project-title" style="color:#FF4655; text-shadow:0 0 30px #FF4655;">Maryville University</h1>
+            <div class="project-meta"><span>COLLEGIATE ESPORTS</span> • <span>BRANDING</span> • <span>EVENT COVERAGE</span></div>
+            <div class="selector-nav-container" style="margin-top: 2rem;">
+                <div class="selector-nav">
+                    <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                    <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                    <button class="selector-item active" style="color: #0a0a0a; background: #FF4655; border-radius: 40px; cursor: default;">Maryville University</button>
+                    <button class="selector-item" onclick="showPage('ottawa')">Ottawa University</button>
+                </div>
+            </div>
+        </div>
+        <!-- GRID-3-COLS forced for Maryville layout -->
+        <div class="project-grid grid-3-cols">
+            <!-- ROW 1 -->
+            <div class="grid-item"><img src="ow_nationalchampionship.jpg" alt="Nat Champs"><div class="grid-caption">NATIONAL CHAMPIONS</div></div>
+            <div class="grid-item"><img src="OW_TECH.jpg" alt="Champions"><div class="grid-caption">CHAMPIONS</div></div>
+            <!-- ROW 2 -->
+            <div class="grid-item"><img src="val_nace_finals.jpg" alt="NACE Finals"><div class="grid-caption">NACE FINALS BOUND</div></div>
+            <!-- ROW 3 -->
+            <div class="grid-item"><img src="comesdowntothis_joobi.jpg" alt="It All Comes Down To This"><div class="grid-caption">IT ALL COMES DOWN TO THIS</div></div>
+            <div class="grid-item"><img src="iced_redbirds.jpg" alt="Zach Hughes"><div class="grid-caption">ZACHARY HUGHES</div></div>
+            <div class="grid-item"><img src="battleforthenorth_zyko.jpg" alt="Battle for the North"><div class="grid-caption">BATTLE FOR THE NORTH</div></div>
+            <!-- ROW 4 -->
+            <div class="grid-item"><img src="10k.jpg" alt="10K Milestone"><div class="grid-caption">10K MILESTONE</div></div>
+            <div class="grid-item"><img src="vision_ow.jpg" alt="Welcome Vision"><div class="grid-caption">WELCOME VISION</div></div>
+            <div class="grid-item"><img src="welcome_squid.jpg" alt="Welcome Squid"><div class="grid-caption">WELCOME SQUID</div></div>
+            <!-- ROW 5 -->
+            <div class="grid-item"><img src="final_v2.jpg" alt="Welcome Back Saints"><div class="grid-caption">WELCOME BACK SAINTS</div></div>
+            <div class="grid-item"><img src="zamudo.jpg" alt="Zamudo"><div class="grid-caption">WELCOME ZAMUDO</div></div>
+            <div class="grid-item"><img src="nacl_schedule.jpg" alt="NACL Schedule"><div class="grid-caption">NACL SCHEDULE</div></div>
+        </div>
+    </div>
+    
+     <div id="page-ottawa" class="page-view">
+         <!-- FIXED PADDING: Changed from page-header to project-hero -->
+         <div class="project-hero">
+            <h1 class="project-title" style="color:#FFC700; text-shadow:0 0 30px #FFC700;">Ottawa University</h1>
+            <div class="project-meta"><span>COLLEGIATE DESIGN</span> • <span>VISUAL IDENTITY</span> • <span>BROADCAST ASSETS</span></div>
+             <div class="selector-nav-container" style="margin-top: 2rem;">
+                 <div class="selector-nav">
+                     <button class="selector-item" onclick="showPage('riot')">Riot Games</button>
+                     <button class="selector-item" onclick="showPage('immortals')">Immortals</button>
+                     <button class="selector-item" onclick="showPage('maryville')">Maryville University</button>
+                     <button class="selector-item active" style="color: #0a0a0a; background: #FFC700; border-radius: 40px; cursor: default;">Ottawa University</button>
+                 </div>
+             </div>
+        </div>
+        <!-- GRID-2-COLS forced for Ottawa layout -->
+        <div class="project-grid grid-2-cols">
+            <!-- ROW 1 -->
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+Intern+Cleave" alt="Cleave"><div class="grid-caption">SOCIAL INTERN CLEAVE</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Social+Intern+Kaya" alt="Kaya"><div class="grid-caption">SOCIAL INTERN KAYA</div></div>
+            <!-- ROW 2 -->
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Welcome+Yung" alt="Welcome Yung"><div class="grid-caption">WELCOME YUNG</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Officially+Committed" alt="Committed"><div class="grid-caption">OFFICIALLY COMMITTED</div></div>
+            <!-- ROW 3 -->
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Official+Roster" alt="Roster"><div class="grid-caption">OFFICIAL ROSTER</div></div>
+            <div class="grid-item"><img src="https://placehold.co/600x400/222/FFF?text=Women+of+Ottawa" alt="Women"><div class="grid-caption">WOMEN OF OTTAWA</div></div>
+        </div>
+    </div>
+    
+    <div id="page-video" class="page-view">
+        <header class="page-header"><h1 class="page-title">Video & Animation</h1><p class="page-subtitle">Motion graphics, editing, and storytelling.</p></header>
+        <div class="youtube-container">
+            <div class="main-video-area">
+                <div class="main-video-player">
+                    <!-- MAIN FEATURE: CHARADES (MP4) -->
+                    <!-- Note: Real video links from a public hosting service (Dropbox raw link used here for demonstration) -->
+                    <video id="mainPlayer" controls playsinline src="https://www.dropbox.com/scl/fi/erdm25qowckyid9nx65wr/CHARADES-V7.mp4?rlkey=qlhs5pih5bx0s256e0bxm9kf5&st=ce14pt06&raw=1"></video>
+                </div>
+                <div class="video-meta">
+                    <div id="mainTitle" class="video-title">Twitch Emote Charades</div>
+                    <div id="mainDesc" class="video-desc">A fun and engaging piece of content created for Immortals.</div>
+                </div>
+            </div>
+            <div class="playlist-sidebar" id="playlistSidebar"><div class="playlist-header">UP NEXT</div></div>
+        </div>
+        <div class="section-title" style="text-align:center;margin-top:4rem;">Animated Graphic</div>
+        <div class="video-split-section">
+            <div class="split-media-item"><img src="https://placehold.co/600x400/222/FFF?text=Promo+Static" alt="Promo"></div>
+            <!-- TONY PERSONAL VIDEO -->
+            <div class="split-media-item"><video controls playsinline src="https://www.dropbox.com/scl/fi/13s9jzo033m9i53evda03/tony_personal.mp4?rlkey=f2bd00weh6d4alx5ncp8yzaj0&st=w4jszw1s&raw=1"></video></div>
+        </div>
+    </div>
+
+    <div id="page-influencers" class="page-view">
+        <header class="page-header"><h1 class="page-title">Influencers</h1><p class="page-subtitle">Connecting brands with personalities.</p></header>
+        <div class="influencer-grid">
+            <!-- YouGelly -->
+            <div class="influencer-card">
+                <img src="https://placehold.co/200x200/222/FFF?text=YouGelly" alt="YouGelly" class="influencer-img">
+                <h3 class="influencer-name">YouGelly</h3>
+                <p class="influencer-role">TFT & League Streamer</p>
+                <div class="influencer-stats">
+                    <div class="stat-row"><i class="fab fa-twitch"></i><span>42K Followers</span></div>
+                    <div class="stat-row"><i class="fab fa-twitter"></i><span>42K Followers</span></div>
+                    <div class="stat-row"><i class="fab fa-instagram"></i><span>22.4K Followers</span></div>
+                </div>
+            </div>
+            <!-- ChiefBeef -->
+            <div class="influencer-card">
+                <img src="https://placehold.co/200x200/222/FFF?text=ChiefBeef" alt="ChiefBeef" class="influencer-img">
+                <h3 class="influencer-name">ChiefBeef</h3>
+                <p class="influencer-role">Rocket League Streamer</p>
+                <div class="influencer-stats">
+                    <div class="stat-row"><i class="fab fa-twitch"></i><span>86K Followers</span></div>
+                    <div class="stat-row"><i class="fab fa-twitter"></i><span>3.8K Followers</span></div>
+                </div>
+            </div>
+            <!-- Avery -->
+            <div class="influencer-card">
+                <img src="https://placehold.co/200x200/222/FFF?text=Avery" alt="Avery" class="influencer-img">
+                <h3 class="influencer-name">Avery</h3>
+                <p class="influencer-role">Variety Streamer</p>
+                <div class="influencer-stats">
+                    <div class="stat-row"><i class="fab fa-twitch"></i><span>152K Followers</span></div>
+                    <div class="stat-row"><i class="fab fa-twitter"></i><span>43K Followers</span></div>
+                    <div class="stat-row"><i class="fab fa-instagram"></i><span>19.1K Followers</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-about" class="page-view">
+        <header class="page-header"><h1 class="page-title">About</h1><p class="page-subtitle">The designer behind the screen.</p></header>
+        <section class="bio-section-centered">
+            <div class="bio-title">Antonio Bautista-Foti</div>
+            <p class="bio-text" style="text-align: left;">
+                I'm Antonio, a visual designer and creative strategist based in St. Louis, MO, specializing in high-impact digital content and brand identity for the gaming and esports industry. 
+                <br><br>
+                For the last six years, I've had the privilege of working with global brands like Immortals, Riot Games, and numerous collegiate programs, building visual narratives that resonate with passionate communities. My work blends strategic thinking with bold, dynamic execution—whether it's building an entire visual system from scratch or designing a single, viral social graphic. I believe good design isn't just about aesthetics; it's about solving problems and driving tangible results.
+                <br><br>
+                Let's build something unforgettable.
+            </p>
+            <button class="nav-btn cta-button" style="margin-top: 2rem;">Get in Touch (Email)</button>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="global-footer">
+        <div class="footer-content">
+            <div class="nav-col">
+                <h4 class="footer-nav-header">NAVIGATION</h4>
+                <div class="nav-grid">
+                    <button onclick="showPage('home')" class="nav-link-main">Home</button>
+                    <button onclick="showPage('about')" class="nav-link-main">About</button>
+                    <div class="work-wrapper">
+                        <button onclick="showPage('work')" class="nav-link-main">Work</button>
+                        <ul class="work-sub-list">
+                            <li><button onclick="showPage('riot')">Riot Games</button></li>
+                            <li><button onclick="showPage('immortals')">Immortals</button></li>
+                            <li><button onclick="showPage('maryville')">Maryville University</button></li>
+                            <li><button onclick="showPage('ottawa')">Ottawa University</button></li>
+                        </ul>
+                    </div>
+                    <button class="nav-link-main">Contact</button>
+                </div>
+            </div>
+            <div class="footer-info-stack">
+                <p class="location-text">St. Louis, MO • Remote</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="copyright">© 2025 Antonio Bautista-Foti. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data for the Video Page Playlist
+        const videoList = [
+            { 
+              src: "https://www.dropbox.com/scl/fi/n13fdjjoy7ijxpwn4ogd8/chat.mp4?rlkey=c4nosq0mb2ajidzwzgtcx39n8&st=dv0e58jd&raw=1", 
+              title: "Stream Chat Widget", 
+              desc: "Custom animated chat overlay designed for high-energy streams." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/6tzzbz83cmqh1f9ps1im7/emoteintro.mp4?rlkey=3jjb5a9unvrjvlcfdy3u44sc2&st=peuowra8&raw=1", 
+              title: "Emote Intro Animation", 
+              desc: "Playful intro sequence showcasing custom channel emotes." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/5ub57sqsrip46m0zrboch/l3.mp4?rlkey=hzw8r9b787p6wcqjttu2pncw4&st=vesedebw&raw=1", 
+              title: "Lower Third Graphic", 
+              desc: "Clean and modern lower third for on-stream talent identification." 
+            },
+            { 
+              src: "https://www.dropbox.com/scl/fi/behxsesorsjf2f3zvofty/logointro.mp4?rlkey=ch1jq0cv1x55atajpzj42caln&st=m282bvw7&raw=1", 
+              title: "Logo Intro Reveal", 
+              desc: "Dynamic logo reveal animation with impact sound design." 
+            }
+        ];
+        
+        // DOM elements (initialized later)
+        let mainPlayer, mainTitle, mainDesc, playlistContainer, deckContainer, cards, backToTopBtn;
+
+        // -- GLOBAL FUNCTIONS --
+        // These must be defined in the global scope so onclick="" attributes work immediately.
+
+        function renderPlaylist() {
+            if(!playlistContainer) return;
+            playlistContainer.innerHTML = '<div class="playlist-header">UP NEXT</div>';
+            videoList.forEach((vid, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-thumbnail';
+                item.onclick = () => swapVideo(index);
+                
+                item.innerHTML = `
+                    <div class="thumb-img-wrapper">
+                        <video 
+                            src="${vid.src}" 
+                            muted 
+                            loop 
+                            playsinline
+                            onloadedmetadata="this.currentTime=2"
+                            onerror="this.parentNode.innerHTML='<img src=&quot;https://placehold.co/160x90/555/FFF?text=Broken&quot; style=&quot;width:100%; height:100%; object-fit:cover;&quot;>'">
+                        </video>
+                    </div>
+                    <div class="thumb-info"><div class="thumb-title">${vid.title}</div></div>
+                `;
+                const video = item.querySelector('video');
+                if(video) {
+                    item.addEventListener('mouseenter', () => {
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                // Auto-play was prevented or interrupted, likely by fast mouse movement
+                            });
+                        }
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 2; 
+                    });
+                }
+                playlistContainer.appendChild(item);
+            });
+        }
+
+        function swapVideo(index) {
+            if(!mainPlayer) return;
+            const oldMain = { 
+                src: mainPlayer.getAttribute('src'), 
+                title: mainTitle.textContent, 
+                desc: mainDesc.textContent 
+            };
+            const selected = videoList[index];
+            
+            mainPlayer.src = selected.src; 
+            mainPlayer.load(); 
+            mainPlayer.play();
+            mainTitle.textContent = selected.title; 
+            mainDesc.textContent = selected.desc;
+            
+            if(oldMain.src) {
+                videoList.splice(index, 1); 
+                videoList.push(oldMain);
+            }
+            renderPlaylist();
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            let btnToActive = document.getElementById('btn-' + pageId);
+            const isWorkPage = ['immortals', 'maryville', 'riot', 'ottawa'].includes(pageId);
+            if(isWorkPage) {
+                btnToActive = document.getElementById('btn-work');
+            } 
+            
+            if (btnToActive) {
+                btnToActive.classList.add('active');
+            }
+
+            const page = document.getElementById('page-' + pageId);
+            if (page) {
+                page.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+            
+            // Back to top visibility
+            if (backToTopBtn) {
+                 if(isWorkPage || pageId === 'video' || pageId === 'influencers' || pageId === 'events') {
+                     backToTopBtn.style.display = 'flex';
+                 } else {
+                     backToTopBtn.style.display = 'none'; 
+                 }
+            }
+            
+            // Glow Logic
+            const root = document.documentElement;
+            if (pageId === 'home' || pageId === 'about') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
+            else if (pageId === 'immortals') root.style.setProperty('--global-glow-color', '#26E6C7'); 
+            else if (pageId === 'maryville' || pageId === 'riot') root.style.setProperty('--global-glow-color', '#FF4655'); 
+            else if (pageId === 'ottawa') root.style.setProperty('--global-glow-color', '#FFC700'); 
+            else if (pageId === 'video' || pageId === 'events') root.style.setProperty('--global-glow-color', '#9DE8FF'); 
+            else if (pageId === 'influencers') root.style.setProperty('--global-glow-color', '#FF4655');
+
+            if(pageId === 'work') setTimeout(updateDeck, 50);
+            if(pageId === 'home') runStats();
+            
+            // Fix Twitter Widget Reload
+            if (pageId === 'riot') {
+                setTimeout(() => {
+                    if (typeof twttr !== 'undefined' && twttr.widgets) {
+                        twttr.widgets.load(document.getElementById('riot-social-feed'));
+                    }
+                }, 250);
+            }
+        }
+        
+        function runStats() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let current = 0;
+                const increment = target / 100;
+                const updateCount = () => {
+                    current += increment;
+                    if(current < target) {
+                        counter.innerText = (target % 1 !== 0) ? current.toFixed(1) : Math.ceil(current);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+        
+        // Deck Logic
+        let currentIndex = 0;
+        const projectData = [
+            {title: "Riot Games", desc: "Global esports events and broadcast storytelling."},
+            {title: "Immortals", desc: "Brand identity revitalization and strategic visuals."},
+            {title: "Maryville University", desc: "Championship-winning visual identity for collegiate esports."},
+            {title: "Ottawa University", desc: "Collegiate gaming initiatives and visual language."}
+        ];
+
+        function updateDeckVisuals(floatIndex) {
+            if(!cards) return;
+            if(floatIndex < 0) floatIndex = 0;
+            if(floatIndex > cards.length - 1) floatIndex = cards.length - 1;
+            cards.forEach((card, index) => {
+                let diff = index - floatIndex;
+                if (Math.abs(diff) < 0.1) card.classList.add('active'); 
+                else card.classList.remove('active');
+
+                if (Math.abs(diff) < 0.1) {
+                    card.style.transform = `translateX(0) scale(1) rotate(0deg)`;
+                    card.style.zIndex = 100;
+                    card.style.opacity = 1;
+                } else if (diff > 0) {
+                    card.style.transform = `translateX(${diff * 40}px) scale(${1 - (diff * 0.1)}) rotate(${diff * 5}deg)`;
+                    card.style.zIndex = 100 - Math.round(diff * 10); 
+                    card.style.opacity = 1 - (diff * 0.2);
+                } else {
+                    let absDiff = Math.abs(diff);
+                    card.style.transform = `translateX(${diff * 40}px) scale(${1 - (absDiff * 0.1)}) rotate(${diff * 5}deg)`;
+                    card.style.zIndex = 100 - Math.round(absDiff * 10);
+                    card.style.opacity = 1 - (absDiff * 0.2);
+                }
+            });
+            
+            // Update colors
+            let nearestIndex = Math.round(floatIndex);
+            let color = '#9DE8FF'; 
+            if (nearestIndex === 0) color = '#FF4655';
+            else if (nearestIndex === 1) color = '#26E6C7';
+            else if (nearestIndex === 2) color = '#FF4655';
+            else if (nearestIndex === 3) color = '#FFC700';
+
+            const titleSpan = document.querySelector('.page-title .elegant-serif');
+            if(titleSpan) {
+                titleSpan.style.color = color;
+                titleSpan.style.textShadow = `0 0 15px ${color}`;
+            }
+            if(document.getElementById('page-work').classList.contains('active')) {
+                 document.documentElement.style.setProperty('--global-glow-color', color);
+            }
+        }
+        
+        function updateDeck() {
+            updateDeckVisuals(currentIndex);
+            const infoHeader = document.getElementById('info-header');
+            const infoDesc = document.getElementById('info-desc');
+            if(projectData[currentIndex]) {
+                infoHeader.textContent = projectData[currentIndex].title;
+                infoDesc.textContent = projectData[currentIndex].desc;
+            }
+            const selectorItems = document.querySelectorAll('.selector-item');
+            const selectorPill = document.querySelector('.selector-pill');
+            if (selectorItems.length > 0 && selectorPill) {
+                selectorItems.forEach(item => item.classList.remove('active'));
+                const activeItem = selectorItems[currentIndex];
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                    selectorPill.style.width = activeItem.offsetWidth + 'px';
+                    selectorPill.style.left = activeItem.offsetLeft + 'px';
+                    if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
+                    else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIndex === 3) selectorPill.style.backgroundColor = '#FFC700';
+                }
+            }
+        }
+        
+        function moveDeck(direction) {
+            if(!cards) return;
+            currentIndex += direction;
+            if(currentIndex < 0) currentIndex = cards.length - 1;
+            if(currentIndex >= cards.length) currentIndex = 0;
+            updateDeck();
+        }
+        function selectCard(index) {
+            currentIndex = index;
+            updateDeck();
+        }
+
+        // Drag Logic
+        let isDragging = false;
+        let startX = 0;
+        let startVal = 0;
+
+        function startDrag(e) {
+            if (!deckContainer) return;
+            isDragging = true;
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].pageX;
+            } else {
+                startX = e.pageX;
+            }
+            startVal = currentIndex;
+            deckContainer.style.cursor = 'grabbing';
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            if (deckContainer) deckContainer.style.cursor = 'grab';
+            const finalIndex = Math.round(currentIndex);
+            snapToCard(finalIndex);
+        }
+
+        function moveDrag(e) {
+            if (!isDragging) return;
+            e.preventDefault(); 
+            let currentX;
+            if (e.type === 'touchmove') {
+                currentX = e.touches[0].pageX;
+            } else {
+                currentX = e.pageX;
+            }
+            
+            const diff = startX - currentX;
+            const shift = diff / 200; 
+            let newVal = startVal + shift;
+            
+            if (newVal < 0) newVal = newVal * 0.3; 
+            if (newVal > cards.length - 1) newVal = (cards.length - 1) + (newVal - (cards.length - 1)) * 0.3; 
+
+            currentIndex = newVal;
+            updateDeckVisuals(currentIndex);
+        }
+
+        function snapToCard(targetIndex) {
+            if (targetIndex < 0) targetIndex = 0;
+            if (targetIndex > cards.length - 1) targetIndex = cards.length - 1;
+            currentIndex = targetIndex;
+            updateDeck();
+        }
+
+        // -- INITIALIZATION --
+        document.addEventListener('DOMContentLoaded', () => { 
+            // Assign DOM elements now that they exist
+            mainPlayer = document.getElementById('mainPlayer');
+            mainTitle = document.getElementById('mainTitle');
+            mainDesc = document.getElementById('mainDesc');
+            playlistContainer = document.getElementById('playlistSidebar');
+            deckContainer = document.getElementById('workDeckContainer');
+            cards = document.querySelectorAll('.work-card');
+            backToTopBtn = document.getElementById('backToTop');
+
+            if(playlistContainer) renderPlaylist();
+            
+            if (deckContainer) {
+                deckContainer.addEventListener('mousedown', startDrag);
+                deckContainer.addEventListener('touchstart', startDrag);
+                
+                document.addEventListener('mouseup', endDrag);
+                deckContainer.addEventListener('mouseleave', endDrag);
+                document.addEventListener('touchend', endDrag);
+                
+                deckContainer.addEventListener('mousemove', moveDrag);
+                deckContainer.addEventListener('touchmove', moveDrag);
+            }
+            
+            // Scroll listener
+            window.addEventListener('scroll', () => {
+                if (backToTopBtn) {
+                    const activePage = document.querySelector('.page-view.active');
+                    const activeId = activePage ? activePage.id.replace('page-', '') : 'home';
+
+                    if (['riot', 'immortals', 'maryville', 'ottawa', 'work', 'video', 'influencers', 'events'].includes(activeId)) {
+                        if (window.scrollY > 300) {
+                            backToTopBtn.style.display = 'flex';
+                        } else {
+                            backToTopBtn.style.display = 'none';
+                        }
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
+                }
+            });
+
+            showPage('home'); 
+        });
+    </script>
+</body>
+</html>
