@@ -125,6 +125,27 @@
             to { opacity: 1; } 
         }
 
+        /* Work Card Entrance Animation */
+        @keyframes flyInCard {
+            0% { 
+                transform: translateY(100vh) scale(0.5) rotate(10deg); 
+                opacity: 0; 
+            }
+            60% {
+                transform: translateY(-20px) scale(1.05) rotate(-5deg); 
+                opacity: 1;
+            }
+            100% { 
+                /* Let JS set the final transform for the stack fan effect */
+                /* This keyframe is just to ensure it reaches opacity 1 */
+                opacity: 1; 
+            }
+        }
+        
+        .card-animate-enter {
+            animation: flyInCard 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
         .page-view {
             display: none; 
             animation: fadeIn 0.6s ease-out;
@@ -207,7 +228,6 @@
         /* ==========================
            5. COMPONENT: CAROUSEL
            ========================== */
-        /* UPDATED: Carousel container for 3-logo focus */
         .brands-section {
             padding: 2rem 0; 
             text-align: center; 
@@ -217,9 +237,9 @@
             max-width: 900px; 
             margin-left: auto; 
             margin-right: auto;
-            /* Stronger gradient mask for "fading out on each side" */
-            mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
+            /* Stronger gradient mask for fading out on each side */
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
         }
         .section-title {
             color: var(--secondary-text); text-transform: uppercase;
@@ -227,35 +247,90 @@
         }
         .marquee-track {
             display: flex; width: max-content; 
-            /* Slower animation for more items */
             animation: scroll 60s linear infinite;
         }
+        .marquee-track:hover {
+            animation-play-state: paused; /* Pause on hover */
+        }
+        
         @keyframes scroll { 
             0% { transform: translateX(0); } 
             100% { transform: translateX(-33.333%); } 
         }
         
         .logo-item {
-            /* Increased spacing for "only 3 logos at a time" visual */
             padding: 0 60px; 
             display: flex; align-items: center;
         }
 
         .logo-item img {
-            /* UPDATED: Increased height to 60px for better visibility */
             height: 60px; 
             width: auto; 
             max-width: 180px; 
             object-fit: contain;
-            /* Note: Ensure PNGs are transparent! */
             filter: grayscale(100%) brightness(1000%); 
             opacity: 0.6; transition: opacity 0.3s;
         }
         .logo-item img:hover { 
             opacity: 1; 
-            /* Shows color on hover */
             filter: grayscale(0%) brightness(100%) drop-shadow(0 0 5px var(--accent-color)); 
         }
+
+        /* NEW GRAPHICS CAROUSEL (Auto-scrolling) */
+        .graphics-carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            /* Blur edges */
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+        }
+        
+        .graphics-track {
+            display: flex;
+            width: max-content;
+            gap: 1.5rem;
+            animation: scrollRight 45s linear infinite; /* Scroll RIGHT */
+        }
+        .graphics-track:hover {
+            animation-play-state: paused;
+        }
+        
+        /* UPDATED: Keyframes for scrolling RIGHT */
+        @keyframes scrollRight { 
+            0% { transform: translateX(-50%); } /* Start offset to show second set */
+            100% { transform: translateX(0%); } /* Move to 0 to scroll right */
+        }
+        
+        .graphic-item {
+            flex: 0 0 300px; 
+            height: 200px;   
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+            background: #1a1a1a;
+        }
+        .graphic-item:hover {
+            transform: scale(1.02);
+            border-color: var(--global-glow-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .graphic-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .graphic-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 15px; color: white; font-family: 'Space Mono', monospace; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
 
         /* ==========================
            6. COMPONENT: STATS & GRIDS
@@ -286,16 +361,15 @@
         .bio-text { color: #cccccc; font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
         .link-highlight { color: var(--text-color); background: rgba(255,255,255,0.1); padding: 0 5px; border-radius: 4px; }
         
-        /* Updated: Highlight Box matches site blue (#9DE8FF) */
-        /* Text color changed to black for readability on light blue */
+        /* Highlight Box matches site blue */
         .highlight-box-blue {
             background-color: var(--accent-color); /* #9DE8FF */
-            color: #0a0a0a;
+            color: #0a0a0a; /* Black text for contrast */
             padding: 2px 10px;
             display: inline-block;
             transform: skew(-5deg);
             margin: 0 5px;
-            font-weight: 800; /* Extra bold to pop */
+            font-weight: 800; 
         }
         .highlight-box-blue span {
             display: inline-block;
@@ -367,11 +441,14 @@
 
         .work-deck { relative; width: 260px; height: 390px; perspective: 1000px; pointer-events: none; }
         
+        /* Work Card */
         .work-card {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(20, 20, 20, 0.9); backdrop-filter: blur(10px);
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); overflow: hidden;
+            /* Changed transition for smoother drag */
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
             cursor: pointer; text-decoration: none;
             border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -379,6 +456,13 @@
             pointer-events: auto; 
         }
         .work-card.no-transition { transition: none !important; }
+
+        /* Intro Animation Class */
+        /* When .intro is added to .work-deck, override inline styles to force them off-screen */
+        .work-deck.intro .work-card {
+            transform: translateY(120vh) rotate(0deg) scale(0.5) !important;
+            opacity: 0 !important;
+        }
 
         /* Card-specific Glow Colors */
         .glow-teal { --card-glow: #26E6C7; border-color: rgba(38, 230, 199, 0.4); }
@@ -407,7 +491,7 @@
             border-left: 4px solid var(--global-glow-color); transition: border-color 0.5s ease;
             min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .info-header { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); margin-bottom: 0.5rem; letter-spacing: 1px; }
+        .info-header { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); margin-bottom: 0.5rem; letter-spacing: 1px; transition: color 0.3s ease; }
         .info-description { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #ffffff; line-height: 1.6; }
 
         /* ==========================
@@ -619,7 +703,8 @@
             grid-template-columns: 300px 1fr;
             gap: 4rem;
             max-width: 1200px;
-            margin: 6rem auto;
+            /* Increased top margin to prevent header overlap */
+            margin: 14rem auto 6rem auto;
             padding: 0 5%;
             align-items: center;
         }
@@ -661,7 +746,7 @@
         /* CONTACT FORM STYLES */
         .contact-container {
             max-width: 600px;
-            margin: 4rem auto 8rem auto;
+            margin: 8rem auto 8rem auto;
             padding: 2rem;
             background: rgba(20, 20, 20, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -720,7 +805,7 @@
 
         /* Media Queries for new layouts */
         @media(max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-grid { grid-template-columns: 1fr; text-align: center; margin-top: 12rem; }
             .about-right { text-align: center; }
         }
 
@@ -923,6 +1008,7 @@
                 <div class="logo-item"><img src="22afd90b-ccfe-4ad1-81b0-e1f804dd9f0f-profile_image-300x300 (1).png" alt="Ottawa University"></div>
             </div>
         </section>
+
         <section class="stats-split-grid" id="statsSection">
             <div class="stat-card">
                 <div class="stat-display">+<span class="counter" data-target="1.1">0</span> B</div>
@@ -936,10 +1022,90 @@
                  <p class="stat-description">Crafting high-impact, user-generated content that grabs attention instantly and sparks viral conversations.</p>
             </div>
         </section>
+        
+        <!-- NEW GRAPHICS CAROUSEL (Auto-scrolling) -->
+        <div class="graphics-carousel-container">
+             <div class="graphics-track">
+                 <!-- SET 1 -->
+                 <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="ow_nationalchampionship.jpg" alt="Maryville">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('riot')">
+                    <img src="VALORANT (1).jpg" alt="Riot">
+                    <div class="graphic-overlay">RIOT GAMES</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost1.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                 <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="OW_TECH.jpg" alt="Maryville Tech">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                 <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="welcomesolo.jpg" alt="Immortals Solo">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost2.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="10k.jpg" alt="Maryville 10k">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost3.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+
+                 <!-- SET 2 (Duplicate for seamless loop) -->
+                 <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="ow_nationalchampionship.jpg" alt="Maryville">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('riot')">
+                    <img src="VALORANT (1).jpg" alt="Riot">
+                    <div class="graphic-overlay">RIOT GAMES</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost1.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                 <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="OW_TECH.jpg" alt="Maryville Tech">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                 <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="welcomesolo.jpg" alt="Immortals Solo">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost2.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('maryville')">
+                    <img src="10k.jpg" alt="Maryville 10k">
+                    <div class="graphic-overlay">MARYVILLE</div>
+                </div>
+                <div class="graphic-item" onclick="window.showPage('immortals')">
+                    <img src="SocialPost3.webp" alt="Immortals Social">
+                    <div class="graphic-overlay">IMMORTALS</div>
+                </div>
+             </div>
+        </div>
+        
+        <div style="text-align:center; margin-bottom: 3rem;">
+             <button class="nav-btn cta-button" style="border: 1px solid white;" onclick="window.showPage('work')">View More Work</button>
+        </div>
+
         <section class="bio-section-centered">
             <!-- UPDATED COPY -->
             <div class="bio-title">Stop Guessing. <span class="highlight-box-blue"><span>Start Feeling.</span></span></div>
             <p class="bio-text">Your brand is more than just a logo. It's a <span class="link-highlight">story waiting to be told.</span></p>
+            <br>
+            <button class="nav-btn cta-button" onclick="window.showPage('contact')">Let's Build a Story</button>
         </section>
     </div>
 
@@ -1583,6 +1749,22 @@
                     }
                 }, 250);
             }
+
+            // If switching to work page, trigger animation on cards
+            if(pageId === 'work') {
+                const deckContainer = document.getElementById('cardDeck');
+                // Add intro class to trigger off-screen state
+                deckContainer.classList.add('intro');
+                
+                // Force reflow
+                void deckContainer.offsetWidth;
+                
+                // Remove intro class to trigger transition back to normal
+                // Use a slight timeout to ensure the 'intro' state is registered
+                setTimeout(() => {
+                    deckContainer.classList.remove('intro');
+                }, 50);
+            }
         }
 
         window.runStats = function() {
@@ -1648,26 +1830,41 @@
         }
 
         window.updateDeck = function() {
+            // Use rounded index for snappy updates
+            const currentIdxInt = Math.round(currentIndex);
             window.updateDeckVisuals(currentIndex);
+            
             const infoHeader = document.getElementById('info-header');
             const infoDesc = document.getElementById('info-desc');
-            if(projectData[currentIndex]) {
-                infoHeader.textContent = projectData[currentIndex].title;
-                infoDesc.textContent = projectData[currentIndex].desc;
+            
+            if(projectData[currentIdxInt]) {
+                infoHeader.textContent = projectData[currentIdxInt].title;
+                infoDesc.textContent = projectData[currentIdxInt].desc;
+                
+                // --- NEW: Change header color based on project ---
+                // Default blue
+                let headerColor = '#9DE8FF'; 
+                if (currentIdxInt === 0) headerColor = '#FF4655'; // Riot (Red)
+                else if (currentIdxInt === 1) headerColor = '#26E6C7'; // Immortals (Teal)
+                else if (currentIdxInt === 2) headerColor = '#FF4655'; // Maryville (Red)
+                else if (currentIdxInt === 3) headerColor = '#FFC700'; // Ottawa (Yellow)
+                
+                infoHeader.style.color = headerColor;
             }
+            
             const selectorItems = document.querySelectorAll('.selector-item');
             const selectorPill = document.querySelector('.selector-pill');
             if (selectorItems.length > 0 && selectorPill) {
                 selectorItems.forEach(item => item.classList.remove('active'));
-                const activeItem = selectorItems[currentIndex];
+                const activeItem = selectorItems[currentIdxInt];
                 if (activeItem) {
                     activeItem.classList.add('active');
                     selectorPill.style.width = activeItem.offsetWidth + 'px';
                     selectorPill.style.left = activeItem.offsetLeft + 'px';
-                    if (currentIndex === 0) selectorPill.style.backgroundColor = '#FF4655';
-                    else if (currentIndex === 1) selectorPill.style.backgroundColor = '#26E6C7';
-                    else if (currentIndex === 2) selectorPill.style.backgroundColor = '#FF4655';
-                    else if (currentIndex === 3) selectorPill.style.backgroundColor = '#FFC700';
+                    if (currentIdxInt === 0) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIdxInt === 1) selectorPill.style.backgroundColor = '#26E6C7';
+                    else if (currentIdxInt === 2) selectorPill.style.backgroundColor = '#FF4655';
+                    else if (currentIdxInt === 3) selectorPill.style.backgroundColor = '#FFC700';
                 }
             }
         }
