@@ -165,6 +165,7 @@
         /* ==========================
            5. COMPONENT: CAROUSEL
            ========================== */
+        /* UPDATED: Carousel container for 3-logo focus */
         .brands-section {
             padding: 2rem 0; 
             text-align: center; 
@@ -174,6 +175,7 @@
             max-width: 900px; 
             margin-left: auto; 
             margin-right: auto;
+            /* Stronger gradient mask for "fading out on each side" */
             mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%);
         }
@@ -183,7 +185,8 @@
         }
         .marquee-track {
             display: flex; width: max-content; 
-            animation: scroll 40s linear infinite;
+            /* Slower animation for more items */
+            animation: scroll 60s linear infinite;
         }
         @keyframes scroll { 
             0% { transform: translateX(0); } 
@@ -191,15 +194,26 @@
         }
         
         .logo-item {
+            /* Increased spacing for "only 3 logos at a time" visual */
             padding: 0 60px; 
             display: flex; align-items: center;
         }
 
         .logo-item img {
-            height: 50px; width: auto; max-width: 150px; object-fit: contain;
-            filter: grayscale(100%) brightness(1000%); opacity: 0.6; transition: opacity 0.3s;
+            /* UPDATED: Increased height to 60px for better visibility */
+            height: 60px; 
+            width: auto; 
+            max-width: 180px; 
+            object-fit: contain;
+            /* Note: Ensure PNGs are transparent! */
+            filter: grayscale(100%) brightness(1000%); 
+            opacity: 0.6; transition: opacity 0.3s;
         }
-        .logo-item img:hover { opacity: 1; filter: grayscale(100%) brightness(1000%) drop-shadow(0 0 5px var(--accent-color)); }
+        .logo-item img:hover { 
+            opacity: 1; 
+            /* Shows color on hover */
+            filter: grayscale(0%) brightness(100%) drop-shadow(0 0 5px var(--accent-color)); 
+        }
 
         /* ==========================
            6. COMPONENT: STATS & GRIDS
@@ -230,6 +244,16 @@
         .bio-text { color: #cccccc; font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
         .link-highlight { color: var(--text-color); background: rgba(255,255,255,0.1); padding: 0 5px; border-radius: 4px; }
         
+        /* About Profile Pic */
+        .about-pfp {
+            width: 200px; height: 200px; 
+            object-fit: cover; 
+            border-radius: 30px; /* Rounded Square */
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255,255,255,0.1);
+            background-color: #111;
+        }
+
         .page-header { padding: 8rem 5% 1rem 5%; text-align: center; }
         .page-title {
             font-size: clamp(2rem, 5vw, 4rem); font-weight: 700;
@@ -388,6 +412,14 @@
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white; font-family: 'Space Mono', monospace; font-size: 0.7rem;
             text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;
+        }
+        
+        /* NEW UTILITY: Crop Bus Wrap to 16:9 with centered windows */
+        .crop-bus-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: center; /* Ensures windows/middle is focus */
         }
         
         /* Updated Utility for Events Page Uniformity */
@@ -795,26 +827,42 @@
             <div class="section-title">Partners Worked With</div>
             <div class="marquee-track">
                 <!-- 3 SETS for seamless looping -->
-                <div class="logo-item"><img src="https://logo.clearbit.com/progressive.com" alt="Progressive"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/americanexpress.com" alt="Amex"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/bitstamp.net" alt="Bitstamp"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/dxracer.com" alt="DXRacer"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/toyota.com" alt="Toyota"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/riotgames.com" alt="Riot"></div>
-
-                <div class="logo-item"><img src="https://logo.clearbit.com/progressive.com" alt="Progressive"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/americanexpress.com" alt="Amex"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/bitstamp.net" alt="Bitstamp"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/dxracer.com" alt="DXRacer"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/toyota.com" alt="Toyota"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/riotgames.com" alt="Riot"></div>
                 
-                <div class="logo-item"><img src="https://logo.clearbit.com/progressive.com" alt="Progressive"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/americanexpress.com" alt="Amex"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/bitstamp.net" alt="Bitstamp"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/dxracer.com" alt="DXRacer"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/toyota.com" alt="Toyota"></div>
-                <div class="logo-item"><img src="https://logo.clearbit.com/riotgames.com" alt="Riot"></div>
+                <!-- SET 1 -->
+                <div class="logo-item"><img src="RiotGamesLogo.webp" alt="Riot Games"></div>
+                <div class="logo-item"><img src="61-612731_american-express-logo-white-transparent-clipart.png" alt="American Express"></div>
+                <div class="logo-item"><img src="Bud-Light-logo (1).png" alt="Budlight"></div>
+                <div class="logo-item"><img src="2560px-Logo_of_the_Progressive_Corporation.svg (3).png" alt="Progressive"></div>
+                <div class="logo-item"><img src="Toyota_logo_(Red).svg.png" alt="Toyota"></div>
+                <div class="logo-item"><img src="Bitstamp logo, tagline- Pure White.png" alt="Bitstamp"></div>
+                <div class="logo-item"><img src="dxracer_white.png" alt="DXRacer"></div>
+                <div class="logo-item"><img src="Immortals_logo.svg.png" alt="Immortals"></div>
+                <div class="logo-item"><img src="MARYVILLE_M_LOGO (1).png" alt="Maryville"></div>
+                <div class="logo-item"><img src="22afd90b-ccfe-4ad1-81b0-e1f804dd9f0f-profile_image-300x300 (1).png" alt="Ottawa University"></div>
+
+                <!-- SET 2 -->
+                <div class="logo-item"><img src="RiotGamesLogo.webp" alt="Riot Games"></div>
+                <div class="logo-item"><img src="61-612731_american-express-logo-white-transparent-clipart.png" alt="American Express"></div>
+                <div class="logo-item"><img src="Bud-Light-logo (1).png" alt="Budlight"></div>
+                <div class="logo-item"><img src="2560px-Logo_of_the_Progressive_Corporation.svg (3).png" alt="Progressive"></div>
+                <div class="logo-item"><img src="Toyota_logo_(Red).svg.png" alt="Toyota"></div>
+                <div class="logo-item"><img src="Bitstamp logo, tagline- Pure White.png" alt="Bitstamp"></div>
+                <div class="logo-item"><img src="dxracer_white.png" alt="DXRacer"></div>
+                <div class="logo-item"><img src="Immortals_logo.svg.png" alt="Immortals"></div>
+                <div class="logo-item"><img src="MARYVILLE_M_LOGO (1).png" alt="Maryville"></div>
+                <div class="logo-item"><img src="22afd90b-ccfe-4ad1-81b0-e1f804dd9f0f-profile_image-300x300 (1).png" alt="Ottawa University"></div>
+                
+                <!-- SET 3 -->
+                <div class="logo-item"><img src="RiotGamesLogo.webp" alt="Riot Games"></div>
+                <div class="logo-item"><img src="61-612731_american-express-logo-white-transparent-clipart.png" alt="American Express"></div>
+                <div class="logo-item"><img src="Bud-Light-logo (1).png" alt="Budlight"></div>
+                <div class="logo-item"><img src="2560px-Logo_of_the_Progressive_Corporation.svg (3).png" alt="Progressive"></div>
+                <div class="logo-item"><img src="Toyota_logo_(Red).svg.png" alt="Toyota"></div>
+                <div class="logo-item"><img src="Bitstamp logo, tagline- Pure White.png" alt="Bitstamp"></div>
+                <div class="logo-item"><img src="dxracer_white.png" alt="DXRacer"></div>
+                <div class="logo-item"><img src="Immortals_logo.svg.png" alt="Immortals"></div>
+                <div class="logo-item"><img src="MARYVILLE_M_LOGO (1).png" alt="Maryville"></div>
+                <div class="logo-item"><img src="22afd90b-ccfe-4ad1-81b0-e1f804dd9f0f-profile_image-300x300 (1).png" alt="Ottawa University"></div>
             </div>
         </section>
         <section class="stats-split-grid" id="statsSection">
